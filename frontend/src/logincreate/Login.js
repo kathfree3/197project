@@ -6,7 +6,7 @@ import axios from 'axios'
 // local imports
 import {
   Button, Form, Label, Input, FullPage,
-} from '../GlobalStyles'
+} from '../../GlobalStyles'
 
 const Login = () => {
   const [username, setUsername] = useState('')

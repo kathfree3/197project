@@ -1,5 +1,5 @@
 // package imports
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
@@ -9,26 +9,29 @@ import {
 } from '../GlobalStyles'
 
 const Home = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [test, setTest] = useState({})
 
   const navigate = useNavigate()
-
-  const submit = async () => {
-    const { data } = await axios.post('/account/login', { username, password })
-    // eslint-disable-next-line no-alert
-    return data.success ? navigate('/') : alert(data.msg)
-  }
 
   const logout = async () => {
     await axios.post('/account/logout')
     navigate('/login')
   }
 
+  useEffect(() => {
+    const setup = async () => {
+      const { data } = await axios.get('/account/isloggedin')
+      setTest(data)
+    }
+    setup()
+  }, [])
+
   return (
     <div>
       home page
       <button type="button" onClick={() => logout()}> Log out </button>
+      {test.username}
+      {test.name}
     </div>
   )
 }
