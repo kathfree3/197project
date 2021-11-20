@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import s from 'styled-components'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
+import Table from 'react-bootstrap/Table'
 
 // local imports
 import {
@@ -15,7 +16,22 @@ import { getChores } from '../routecalls/routecalls'
 const ViewChores = ({ loggedin }) => {
   const [chores, setChores] = useState([])
 
-  const mapChores = filtered => filtered.map(c => <Chore chore={c} />)
+  const mapChores = filtered => (
+    <Table>
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Description</th>
+          <th>Assigned To</th>
+          <th>Completed?</th>
+          <th> </th>
+        </tr>
+      </thead>
+      <tbody>
+        {filtered.map(c => <Chore chore={c} key={c._id} />)}
+      </tbody>
+    </Table>
+  )
 
   useEffect(() => {
     const setup = async () => setChores(await getChores())

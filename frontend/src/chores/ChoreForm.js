@@ -6,11 +6,11 @@ import Dropdown from 'react-bootstrap/Dropdown'
 
 // local imports
 import {
-  Button, Form, Label, Input, FullPage,
+  Button, Label, Input,
 } from '../../GlobalStyles'
 import { newChore, getRoomates } from '../routecalls/routecalls'
 
-const CreateChore = () => {
+const ChoreForm = () => {
   const [show, setShow] = useState(false)
   const [assignedTo, setAssignedTo] = useState('None')
   const [assignOptions, setAssignOptions] = useState([])
@@ -21,13 +21,13 @@ const CreateChore = () => {
 
   const close = () => {
     setShow(false)
+    setTask('')
+    setDescription('')
+    setAssignedTo('None')
   }
 
   useEffect(() => {
-    const setup = async () => {
-      const x = await getRoomates()
-      setAssignOptions([...x, 'None'])
-    }
+    const setup = async () => setAssignOptions([...await getRoomates(), 'None'])
     setup()
   }, [])
 
@@ -62,4 +62,4 @@ const CreateChore = () => {
   )
 }
 
-export default CreateChore
+export default ChoreForm

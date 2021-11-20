@@ -13,7 +13,7 @@ const NavBar = ({ loggedin }) => {
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand>EEeee</Navbar.Brand>
       <Nav className="me-auto">
-        <Nav.Link href="/">Home</Nav.Link>
+        <Nav.Link href="/home">Home</Nav.Link>
         <Nav.Link href="/laundry">Laundry</Nav.Link>
         <Nav.Link href="#">Idk</Nav.Link>
       </Nav>

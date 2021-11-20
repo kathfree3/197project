@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 // local imports
-import { getUserLoggedin } from './routecalls/routecalls'
+import { getUserLoggedin, getChores } from './routecalls/routecalls'
 import Home from './Home'
 import Login from './logincreate/Login'
 import Signup from './logincreate/Signup'
@@ -15,9 +15,7 @@ const App = () => {
   const [loggedin, setLoggedin] = useState({})
 
   useEffect(() => {
-    const setup = async () => {
-      setLoggedin(await getUserLoggedin())
-    }
+    const setup = async () => setLoggedin(await getUserLoggedin())
     setup()
     const intervalID = setInterval(() => {
       setup()
@@ -29,8 +27,9 @@ const App = () => {
     <Router>
       <NavBar loggedin={loggedin} />
       <Routes>
-        <Route path="/" element={<Home loggedin={loggedin} />} />
+        <Route path="/home" element={<Home loggedin={loggedin} />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/pickhouse" element={<PickHouse />} />
         <Route path="/laundry" element={<Laundry />} />

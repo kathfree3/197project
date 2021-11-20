@@ -3,6 +3,7 @@ import React from 'react'
 import s from 'styled-components'
 
 import { toggle } from '../routecalls/routecalls'
+import ChoreForm from './ChoreForm'
 
 const Chore = ({ chore }) => {
   const {
@@ -10,24 +11,21 @@ const Chore = ({ chore }) => {
   } = chore
 
   return (
-    <ChoreWrapper key={_id}>
-      <p>
-        {task}
-      </p>
-      <p>
-        {description}
-      </p>
-      <p>
-        {assignedTo}
-      </p>
-      <button type="button" onClick={() => toggle(_id)}>
-        {completed ? 'completed' : 'not completed'}
-      </button>
-    </ChoreWrapper>
+    <tr>
+      <td>{task}</td>
+      <td>{description}</td>
+      <td>{assignedTo}</td>
+      <td>
+        <input
+          className="form-check-input"
+          type="checkbox"
+          value=""
+          checked={completed}
+          onChange={() => toggle(_id)}
+        />
+      </td>
+    </tr>
   )
 }
 
 export default Chore
-
-const ChoreWrapper = s.div`
-`

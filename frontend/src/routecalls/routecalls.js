@@ -58,3 +58,9 @@ export const getRoomates = async () => {
   const { data } = await axios.get('/myhouse//members')
   return data
 }
+
+export const assignChore = async (choreID, assignTo) => {
+  const { data } = await axios.post(`/chores/${choreID}/assign`, { assignTo })
+  // eslint-disable-next-line no-alert
+  return !data.success && alert(data.msg)
+}

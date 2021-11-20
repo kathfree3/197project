@@ -88,9 +88,9 @@ router.post('/create', async (req, res) => {
 
 router.post('/:id/modify', async (req, res) => {
   const { description } = req.body
-  const { choreID } = req.params.id
+  const { id } = req.params
   try {
-    const chore = await Chore.findById(choreID)
+    const chore = await Chore.findById(id)
     chore.description = description
     saveChore(chore)
   } catch (err) {
@@ -100,11 +100,10 @@ router.post('/:id/modify', async (req, res) => {
 })
 
 router.post('/:id/assign', async (req, res) => {
-  const choreID = req.params.id
+  const { id } = req.params
   const { assignTo } = req.body
-  console.log(choreID)
   try {
-    const chore = await Chore.findById(choreID)
+    const chore = await Chore.findById(id)
     chore.assignedTo = assignTo
     saveChore(res, chore)
   } catch (err) {
