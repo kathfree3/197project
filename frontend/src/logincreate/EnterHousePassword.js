@@ -1,12 +1,11 @@
-/* eslint-disable no-alert */
 // package imports
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Modal from 'react-bootstrap/Modal'
-import axios from 'axios'
 
 // local imports
 import { Button } from '../../GlobalStyles'
+import { joinHouse } from '../routecalls/routecalls'
 
 const EnterPassword = ({ house }) => {
   const [show, setShow] = useState(false)
@@ -18,11 +17,7 @@ const EnterPassword = ({ house }) => {
   // reset if you close it
   const close = () => {
     setShow(false)
-  }
-
-  const submit = async () => {
-    const { data } = await axios.post('/account/joinhouse', { _id, password })
-    return data.success ? navigate('/') : alert(data)
+    setPassword('')
   }
 
   return (
@@ -38,7 +33,7 @@ const EnterPassword = ({ house }) => {
         </Modal.Header>
         <Modal.Body>
           <input type="text" style={{ minWidth: '100%' }} value={password} onChange={e => setPassword(e.target.value)} />
-          <Button type="button" onClick={() => submit()}> Join </Button>
+          <Button type="button" onClick={() => joinHouse(navigate, _id, password)}> Join </Button>
           <Button type="button" onClick={() => close()}> Close </Button>
         </Modal.Body>
       </Modal>

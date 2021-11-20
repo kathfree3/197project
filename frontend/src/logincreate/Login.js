@@ -1,24 +1,18 @@
 // package imports
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
 
 // local imports
 import {
   Button, Form, Label, Input, FullPage,
 } from '../../GlobalStyles'
+import { login } from '../routecalls/routecalls'
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   const navigate = useNavigate()
-
-  const submit = async () => {
-    const { data } = await axios.post('/account/login', { username, password })
-    // eslint-disable-next-line no-alert
-    return data.success ? navigate('/') : alert(data.msg)
-  }
 
   return (
     <FullPage>
@@ -28,7 +22,7 @@ const Login = () => {
         <Input value={username} type="text" onChange={e => setUsername(e.target.value)} />
         <Label> Password: </Label>
         <Input value={password} type="text" onChange={e => setPassword(e.target.value)} />
-        <Button type="button" onClick={() => submit()}> Login </Button>
+        <Button type="button" onClick={() => login(navigate, username, password)}> Login </Button>
         <p>
           Dont have an account?
           {' '}

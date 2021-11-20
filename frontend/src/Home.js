@@ -8,50 +8,31 @@ import {
   Button, Form, Label, Input, FullPage,
 } from '../GlobalStyles'
 
-const Home = () => {
-  const [test, setTest] = useState({})
+import {
+  toggle, getChores, getUserLoggedin,
+} from './routecalls/routecalls'
+
+import CreateChore from './chores/CreateChore'
+import ViewChores from './chores/ViewChores'
+
+const Home = ({ loggedin }) => {
   const [chores, setChores] = useState([])
 
   const navigate = useNavigate()
 
-  const logout = async () => {
-    await axios.post('/account/logout')
-    navigate('/login')
-  }
-
   useEffect(() => {
     const setup = async () => {
-      const { data } = await axios.get('/account/isloggedin')
-      setTest(data)
-      const { data: cs } = await axios.get('/chores/notcompleted')
-      setChores(cs)
+      setChores(await getChores())
     }
     setup()
   }, [])
 
   return (
-    <div>
+    <FullPage>
       home page
-      <button type="button" onClick={() => logout()}> Log out </button>
-      {test.username}
-      {test.name}
-      {chores && chores.map(c => (
-        <div>
-          <p>
-            {c.task}
-          </p>
-          <p>
-            {c.description}
-          </p>
-          <p>
-            {c.assignedTo}
-          </p>
-          <p>
-            {c.completed ? 'completed' : 'not completed'}
-          </p>
-        </div>
-      ))}
-    </div>
+      <ViewChores loggedin={loggedin} />
+      <CreateChore />
+    </FullPage>
   )
 }
 

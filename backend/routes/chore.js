@@ -64,7 +64,7 @@ router.get('/:userid', async (req, res) => {
 router.get('/unassigned', async (req, res) => {
   const { house } = req.session
   try {
-    const chores = await Chore.find({ houseID: house, assignedTo: 'none' })
+    const chores = await Chore.find({ houseID: house, assignedTo: 'None' })
     res.send(chores)
   } catch (err) {
     res.send('error getting unassigned chores')

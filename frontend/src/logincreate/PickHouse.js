@@ -1,13 +1,13 @@
 // package imports
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 
 // local imports
 import {
   Button, Form, Label, Input, FullPage,
 } from '../../GlobalStyles'
 import EnterPassword from './EnterHousePassword'
+import { getHouses, createHouse } from '../routecalls/routecalls'
 
 const PickHouse = () => {
   const [houseOptions, setHouseOptions] = useState([])
@@ -18,17 +18,10 @@ const PickHouse = () => {
 
   useEffect(() => {
     const setup = async () => {
-      const { data } = await axios.get('/account/gethouses')
-      setHouseOptions(data)
+      setHouseOptions(await getHouses())
     }
     setup()
   }, [])
-
-  const submit = async () => {
-    const { data } = await axios.post('/account/createhouse', { address, password })
-    // eslint-disable-next-line no-alert
-    return data.success ? navigate('/') : alert(data.msg)
-  }
 
   return (
     <FullPage>
@@ -45,7 +38,7 @@ const PickHouse = () => {
         <Input value={address} type="text" onChange={e => setAddress(e.target.value)} />
         <Label> House Password: </Label>
         <Input value={password} type="text" onChange={e => setPassword(e.target.value)} />
-        <Button type="button" onClick={() => submit()}> Create house </Button>
+        <Button type="button" onClick={() => createHouse(navigate, address, password)}> Create house </Button>
       </Form>
     </FullPage>
   )

@@ -6,6 +6,7 @@ const path = require('path')
 // routers
 const accountRouter = require('./routes/account')
 const choreRouter = require('./routes/chore')
+const houseRouter = require('./routes/house')
 
 // define app
 const app = express()
@@ -33,6 +34,7 @@ app.use(session({
 // use routers
 app.use('/account', accountRouter)
 app.use('/chores', choreRouter)
+app.use('/myhouse', houseRouter)
 
 app.get('/', (req, res) => {
   res.send('hello world')
