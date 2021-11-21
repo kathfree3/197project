@@ -1,5 +1,4 @@
 const express = require('express')
-
 const House = require('../models/house')
 
 const router = express.Router()

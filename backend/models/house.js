@@ -8,6 +8,7 @@ const houseSchema = new Schema({
   members: [String],
   creator: { type: String, required: true },
   password: { type: String, required: true },
+  laundry: { type: [String], default: [] }, // list of IDs
 })
 
 module.exports = model('House', houseSchema)

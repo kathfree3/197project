@@ -1,5 +1,4 @@
 const express = require('express')
-
 const Chore = require('../models/chore')
 
 const router = express.Router()

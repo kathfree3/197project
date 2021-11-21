@@ -6,13 +6,15 @@ const path = require('path')
 // routers
 const accountRouter = require('./routes/account')
 const choreRouter = require('./routes/chore')
-const houseRouter = require('./routes/house')
+const myhouseRouter = require('./routes/myhouse')
+const registerHouseRouter = require('./routes/registerHouse')
+const laundryRouter = require('./routes/laundry')
 
 // define app
 const app = express()
 
 // connect to mongo db
-const my_url = 'mongodb+srv://dbuser:dbpassword@cluster0.pm7lg.mongodb.net/hw-db?retryWrites=true&w=majority'
+const my_url = 'mongodb+srv://dbuser:dbpassword@cluster0.pm7lg.mongodb.net/197project?retryWrites=true&w=majority'
 const MONGO_URI = process.env.MONGODB_URI || my_url
 
 mongoose.connect(MONGO_URI, {
@@ -34,7 +36,9 @@ app.use(session({
 // use routers
 app.use('/account', accountRouter)
 app.use('/chores', choreRouter)
-app.use('/myhouse', houseRouter)
+app.use('/myhouse', myhouseRouter)
+app.use('/registerhouse', registerHouseRouter)
+app.use('/laundry', laundryRouter)
 
 app.get('/', (req, res) => {
   res.send('hello world')

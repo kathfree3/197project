@@ -8,7 +8,7 @@ import Home from './Home'
 import Login from './logincreate/Login'
 import Signup from './logincreate/Signup'
 import PickHouse from './logincreate/PickHouse'
-import Laundry from './laundry/Laundry'
+import LaundryPage from './laundry/LaundryPage'
 import NavBar from './NavBar'
 
 const App = () => {
@@ -32,7 +32,7 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/pickhouse" element={<PickHouse />} />
-        <Route path="/laundry" element={<Laundry />} />
+        <Route path="/laundry" element={<LaundryPage />} />
       </Routes>
     </Router>
   )
