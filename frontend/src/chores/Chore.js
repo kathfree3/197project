@@ -1,9 +1,8 @@
 // package imports
 import React from 'react'
-import s from 'styled-components'
 
+// local imports
 import { toggle } from '../routecalls/routecalls'
-import ChoreForm from './ChoreForm'
 
 const Chore = ({ chore }) => {
   const {

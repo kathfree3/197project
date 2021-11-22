@@ -19,7 +19,7 @@ const Signup = () => {
     <FullPage>
       <Form>
         <h2>Sign up</h2>
-        <Label> Username: </Label>
+        <Label> Account Username: </Label>
         <Input value={username} type="text" onChange={e => setUsername(e.target.value)} />
         <Label> Name: </Label>
         <Input value={name} type="text" onChange={e => setName(e.target.value)} />
@@ -27,8 +27,7 @@ const Signup = () => {
         <Input value={password} type="text" onChange={e => setPassword(e.target.value)} />
         <Create type="button" onClick={() => signup(navigate, name, username, password)}> Signup </Create>
         <p>
-          Already have an account?
-          {' '}
+          {'Already have an account? '}
           <Link to="/login">Log in!</Link>
         </p>
       </Form>

@@ -24,8 +24,7 @@ const Login = () => {
         <Input value={password} type="text" onChange={e => setPassword(e.target.value)} />
         <Button type="button" onClick={() => login(navigate, username, password)}> Login </Button>
         <p>
-          Dont have an account?
-          {' '}
+          {'Dont have an account? '}
           <Link to="/signup">Sign up!</Link>
         </p>
       </Form>

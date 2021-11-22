@@ -1,6 +1,5 @@
 // package imports
 import React, { useState, useEffect } from 'react'
-import s from 'styled-components'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import Table from 'react-bootstrap/Table'
