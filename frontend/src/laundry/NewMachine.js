@@ -5,7 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 
 // local imports
 import {
-  Button, Label, Input,
+  Button, Label, Input, Create,
 } from '../../GlobalStyles'
 import { createMachine } from '../routecalls/routecalls'
 
@@ -28,7 +28,7 @@ const NewMachine = () => {
 
   return (
     <>
-      <Button type="button" onClick={() => setShow(true)}> Register New Machine </Button>
+      <Create type="button" onClick={() => setShow(true)}> Register New Machine </Create>
       <Modal centered show={show} onHide={() => close()} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title> New Laundry Machine </Modal.Title>

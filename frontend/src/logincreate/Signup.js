@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 // local imports
 import {
-  Button, Form, Label, Input, FullPage,
+  Create, Form, Label, Input, FullPage,
 } from '../../GlobalStyles'
 import { signup } from '../routecalls/routecalls'
 
@@ -25,7 +25,7 @@ const Signup = () => {
         <Input value={name} type="text" onChange={e => setName(e.target.value)} />
         <Label> Password: </Label>
         <Input value={password} type="text" onChange={e => setPassword(e.target.value)} />
-        <Button type="button" onClick={() => signup(navigate, name, username, password)}> Signup </Button>
+        <Create type="button" onClick={() => signup(navigate, name, username, password)}> Signup </Create>
         <p>
           Already have an account?
           {' '}

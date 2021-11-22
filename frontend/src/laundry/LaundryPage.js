@@ -1,16 +1,15 @@
 // package imports
 import React, { useState, useEffect } from 'react'
+import s from 'styled-components'
 
 // local imports
-import {
-  Button, Form, Label, Input, FullPage,
-} from '../../GlobalStyles'
+import { FullPage } from '../../GlobalStyles'
 
 import LaundryMachine from './LaundryMachine'
 import NewMachine from './NewMachine'
 import { getMachines } from '../routecalls/routecalls'
 
-const LaundryPage = ({ loggedin }) => {
+const LaundryPage = () => {
   const [machines, setMachines] = useState([])
 
   useEffect(() => {
@@ -18,16 +17,27 @@ const LaundryPage = ({ loggedin }) => {
     setup()
     const intervalID = setInterval(() => {
       setup()
-    }, 10000)
+    }, 2000)
     return () => clearInterval(intervalID)
   }, [])
 
   return (
-    <div>
-      {machines.map(m => <LaundryMachine key={m._id} machine={m} />)}
+    <FullPage>
+      <Wrapper>
+        <div>
+          {machines.filter(m => m.type === 'Washer').map(m => <LaundryMachine key={m._id} machine={m} />)}
+        </div>
+        <div>
+          {machines.filter(m => m.type === 'Dryer').map(m => <LaundryMachine key={m._id} machine={m} />)}
+        </div>
+      </Wrapper>
       <NewMachine />
-    </div>
+    </FullPage>
   )
 }
 
 export default LaundryPage
+
+const Wrapper = s.div`
+  display: flex;
+`

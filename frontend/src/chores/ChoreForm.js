@@ -6,7 +6,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 
 // local imports
 import {
-  Button, Label, Input,
+  Button, Label, Input, Create,
 } from '../../GlobalStyles'
 import { newChore, getRoomates } from '../routecalls/routecalls'
 
@@ -33,7 +33,7 @@ const ChoreForm = () => {
 
   return (
     <>
-      <Button type="button" onClick={() => setShow(true)}> New Chore </Button>
+      <Create type="button" onClick={() => setShow(true)}> New Chore </Create>
       <Modal centered show={show} onHide={() => close()} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title> New Chore </Modal.Title>

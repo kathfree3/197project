@@ -55,6 +55,7 @@ router.post('/startload/:id', async (req, res) => {
     const laundry = await Laundry.findById(id)
     const { duration, inUse } = laundry
     if (inUse) {
+      console.log('Currently in use')
       res.send({ err: 'Currently in use' })
     } else {
       const loadOverAt = moment()
@@ -62,6 +63,7 @@ router.post('/startload/:id', async (req, res) => {
       laundry.timeCompleted = loadOverAt.valueOf()
       laundry.inUse = true
       laundry.save()
+      console.log('saved')
       res.send({ succes: true })
     }
   } catch (err) {
@@ -79,6 +81,7 @@ router.post('/finishload/:id', async (req, res) => {
     const over = moment(timeCompleted)
     if (now >= over) {
       laundry.inUse = false
+      laundry.save()
       res.send({ succes: true })
     } else {
       res.send({ succes: false, msg: 'not done yet' })

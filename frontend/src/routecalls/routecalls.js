@@ -30,12 +30,12 @@ export const getHouses = async () => {
 
 export const createHouse = async (navigate, address, password) => {
   const { data } = await axios.post('/registerhouse/create', { address, password })
-  return data.success ? navigate('/') : alert(data.msg)
+  return data.success ? navigate('/home') : alert(data.msg)
 }
 
 export const joinHouse = async (navigate, _id, password) => {
   const { data } = await axios.post('/registerhouse/join', { _id, password })
-  return data.success ? navigate('/') : alert(data)
+  return data.success ? navigate('/home') : alert(data)
 }
 
 // From the chore router
@@ -77,10 +77,10 @@ export const getMachines = async () => {
 
 export const startLoad = async id => {
   const { data } = await axios.post(`/laundry/startload/${id}`)
-  return data.success ? 'Started' : data.err
+  return data.success ? alert('Laundry Timer Started') : data.err
 }
 
 export const stopLoad = async id => {
   const { data } = await axios.post(`/laundry/finishload/${id}`)
-  return data.success ? 'Finished' : data.msg
+  return data.success ? alert('Laundry taken out') : data.msg
 }
