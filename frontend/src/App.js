@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 // local imports
-import { getUserLoggedin, getChores } from './routecalls/routecalls'
+import { getUserLoggedin } from './routecalls/routecalls'
 import Home from './Home'
 import Login from './logincreate/Login'
 import Signup from './logincreate/Signup'

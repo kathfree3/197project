@@ -12,7 +12,7 @@ const addHouseToUser = async (req, res, username, id) => {
   roomie.houseID = id
   roomie.save(err => {
     if (err) {
-      res.send('issue with adding house field to user')
+      res.send('Issue adding house field to user')
     } else {
       res.send({ success: true })
     }
@@ -22,7 +22,7 @@ const addHouseToUser = async (req, res, username, id) => {
 // can only create a house
 router.post('/create', async (req, res) => {
   const { address, password } = req.body
-  const creator = req.session.username
+  const { username: creator } = req.session
   const members = [creator]
   try {
     const newHouse = await House.create({
@@ -30,8 +30,7 @@ router.post('/create', async (req, res) => {
     })
     addHouseToUser(req, res, creator, newHouse._id)
   } catch (err) {
-    console.log(err)
-    res.send('error of some sorts')
+    res.send('Error creating house')
   }
 })
 
@@ -40,14 +39,13 @@ router.get('/joinoptions', async (req, res) => {
     const options = await House.find()
     res.send(options)
   } catch (err) {
-    console.log(err)
     res.send('error of some sorts')
   }
 })
 
 router.post('/join', async (req, res) => {
   const { _id, password } = req.body
-  const newMember = req.session.username
+  const { username: newMember } = req.session
   try {
     const house = await House.findById({ _id })
     if (!house) {
@@ -65,7 +63,7 @@ router.post('/join', async (req, res) => {
       })
     }
   } catch (err) {
-    console.log(err)
+    res.send('Error joining house')
   }
 })
 

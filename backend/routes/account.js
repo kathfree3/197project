@@ -20,11 +20,11 @@ router.post('/login', async (req, res) => {
         req.session.name = name
         res.send({ success: true })
       } else {
-        res.send('wrong password')
+        res.send('Incorrect password')
       }
     }
   } catch (err) {
-    res.send('log in has problems')
+    res.send('Log in has problems')
   }
 })
 
@@ -40,8 +40,7 @@ router.post('/signup', async (req, res) => {
     req.session.name = name
     res.send({ success: true })
   } catch (err) {
-    console.log(err)
-    res.send({ success: false })
+    res.send('Username is already taken')
   }
 })
 
@@ -54,8 +53,9 @@ router.post('/logout', async (req, res) => {
 })
 
 router.get('/isloggedin', (req, res) => {
-  if (req.session.username !== null && req.session.username !== '') {
-    res.send({ username: req.session.username, name: req.session.name })
+  const { username, name } = req.session
+  if (username !== null && username !== '') {
+    res.send({ username, name })
   } else {
     res.send('no one is logged in')
   }

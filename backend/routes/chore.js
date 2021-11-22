@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-// get chores by completed
+// get just completed chores
 router.get('/completed', async (req, res) => {
   const { house } = req.session
   try {
@@ -50,23 +50,12 @@ router.get('/notcompleted', async (req, res) => {
 // get a persons chores
 router.get('/:userid', async (req, res) => {
   const { house } = req.session
-  const { userID } = req.params.userid
+  const { userid } = req.params
   try {
-    const chores = await Chore.find({ houseID: house, assignedTo: userID })
+    const chores = await Chore.find({ houseID: house, assignedTo: userid })
     res.send(chores)
   } catch (err) {
     res.send('error getting users chores')
-  }
-})
-
-// get unassigned chores
-router.get('/unassigned', async (req, res) => {
-  const { house } = req.session
-  try {
-    const chores = await Chore.find({ houseID: house, assignedTo: 'None' })
-    res.send(chores)
-  } catch (err) {
-    res.send('error getting unassigned chores')
   }
 })
 

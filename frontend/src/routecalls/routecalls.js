@@ -9,12 +9,12 @@ export const logout = async navigate => {
 
 export const login = async (navigate, username, password) => {
   const { data } = await axios.post('/account/login', { username, password })
-  return data.success ? navigate('/home') : alert(data.msg)
+  return data.success ? navigate('/home') : alert(data)
 }
 
 export const signup = async (navigate, name, username, password) => {
   const { data } = await axios.post('/account/signup', { name, username, password })
-  return data.success ? navigate('/pickhouse') : alert(data.msg)
+  return data.success ? navigate('/pickhouse') : alert(data)
 }
 
 export const getUserLoggedin = async () => {
