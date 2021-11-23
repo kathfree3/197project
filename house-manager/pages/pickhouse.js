@@ -15,9 +15,7 @@ const PickHouse = () => {
   const router = useRouter()
   
   useEffect(() => {
-    const setup = async () => {
-      setHouseOptions(await getHouses())
-    }
+    const setup = async () => setHouseOptions(await getHouses())
     setup()
   }, [])
 
@@ -36,8 +34,8 @@ const PickHouse = () => {
         <input value={address} type="text" onChange={e => setAddress(e.target.value)} />
         <label> House Password: </label>
         <input value={password} type="text" onChange={e => setPassword(e.target.value)} />
-        <button className={createbutton} type="button" onClick={() => createHouse(router, address, password)}> Create house </button>
       </form>
+      <button className={createbutton} onClick={() => createHouse(router, address, password)}> Create house </button>
     </div>
   )
 }

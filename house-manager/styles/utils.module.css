@@ -29,3 +29,7 @@
 .machinewrapper span {
   font-weight: normal;
 } 
+
+.full input {
+  width: 100%;
+}

@@ -19,14 +19,25 @@ const LaundryPage = () => {
     return () => clearInterval(intervalID)
   }, [])
 
+  const check = (m, t) => {
+    const { type } = m
+    return t === type
+  }
+
+  const mapM = m => {
+    const { _id } = m
+    return (
+      <LaundryMachine key={_id} machine={m} />
+    )
+  }
   return (
     <div className={page}>
       <div className={flexwrapper}>
         <div>
-          {machines.filter(m => m.type === 'Washer').map(m => <LaundryMachine key={m._id} machine={m} />)}
+          {machines.filter(m => check(m, 'Washer')).map(m => mapM(m))}
         </div>
         <div>
-          {machines.filter(m => m.type === 'Dryer').map(m => <LaundryMachine key={m._id} machine={m} />)}
+          {machines.filter(m => check(m, 'Dryer')).map(m => mapM(m))}
         </div>
       </div>
       <NewMachine />

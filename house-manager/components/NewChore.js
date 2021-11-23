@@ -5,7 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 
 // local imports
 import { newChore, getRoomates } from './routecalls'
-import { createbutton } from '../styles/utils.module.css'
+import { createbutton, full } from '../styles/utils.module.css'
 
 const NewChore = () => {
   const [show, setShow] = useState(false)
@@ -28,12 +28,12 @@ const NewChore = () => {
 
   return (
     <>
-      <button className={createbutton} type="button" onClick={() => setShow(true)}> New Chore </button>
+      <button className={createbutton} onClick={() => setShow(true)}> New Chore </button>
       <Modal centered show={show} onHide={() => close()} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title> New Chore </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className={full}>
           <label> Task: </label>
           <input value={task} type="text" onChange={e => setTask(e.target.value)} />
           <label> Short description: </label>
@@ -49,9 +49,11 @@ const NewChore = () => {
               ))}
             </Dropdown.Menu>
           </Dropdown>
-          <button type="button" onClick={() => newChore(assignedTo, task, description)}> Create </button>
-          <button type="button" onClick={() => close()}> Close </button>
         </Modal.Body>
+        <Modal.Footer> 
+          <button onClick={() => newChore(assignedTo, task, description)}> Create </button>
+          <button onClick={() => close()}> Close </button>
+        </ Modal.Footer> 
       </Modal>
     </>
   )

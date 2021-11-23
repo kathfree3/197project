@@ -11,9 +11,7 @@ const NavBar = () => {
   const [loggedin, setLoggedin] = useState({})
 
   useEffect(() => {
-    const setup = async () => {
-      setLoggedin(await getUserLoggedin())
-    }
+    const setup = async () => setLoggedin(await getUserLoggedin())
     setup()
     const intervalID = setInterval(() => {
       setup()
@@ -22,7 +20,6 @@ const NavBar = () => {
   }, [])
 
   const { name } = loggedin || ''
-
 
   const router = useRouter()
 
@@ -37,7 +34,6 @@ const NavBar = () => {
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>{`Signed in as: ${name}`}</Navbar.Text>
           <NavDropdown title="" id="nav-dropdown">
-            <NavDropdown.Item> Account Details </NavDropdown.Item>
             <NavDropdown.Item onClick={() => logout(router)}> Logout</NavDropdown.Item>
           </NavDropdown>
         </Navbar.Collapse>
@@ -47,3 +43,4 @@ const NavBar = () => {
 }
 
 export default NavBar
+

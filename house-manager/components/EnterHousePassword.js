@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 
 // local imports
 import { joinHouse } from './routecalls'
+import { full } from '../styles/utils.module.css'
 
 const EnterPassword = ({ house }) => {
   const [show, setShow] = useState(false)
@@ -21,20 +22,18 @@ const EnterPassword = ({ house }) => {
 
   return (
     <>
-      <button type="button" onClick={() => setShow(true)}> Join </button>
+      <button onClick={() => setShow(true)}> Join </button>
       <Modal centered show={show} onHide={() => close()} animation={false}>
         <Modal.Header closeButton>
-          <Modal.Title>
-            Enter Password to join house
-            {': '}
-            {house.address}
-          </Modal.Title>
+          <Modal.Title>{`Enter Password to join: ${house.address}`}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <input type="text" style={{ minWidth: '100%' }} value={password} onChange={e => setPassword(e.target.value)} />
-          <button type="button" onClick={() => joinHouse(router, _id, password)}> Join </button>
-          <button type="button" onClick={() => close()}> Close </button>
+        <Modal.Body className={full}>
+          <input type="text" value={password} onChange={e => setPassword(e.target.value)} />
         </Modal.Body>
+        <Modal.Footer>
+          <button onClick={() => joinHouse(router, _id, password)}> Join </button>
+          <button onClick={() => close()}> Close </button>
+        </Modal.Footer>
       </Modal>
     </>
   )

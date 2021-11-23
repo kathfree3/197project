@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import Table from 'react-bootstrap/Table'
-import { useRouter } from 'next/router'
 
 // local imports
 import { page } from '../styles/utils.module.css'
@@ -14,7 +13,7 @@ import { getChores, getUserLoggedin } from '../components/routecalls'
 const Home = () => {
   const [chores, setChores] = useState([])
   const [loggedin, setLoggedin] = useState({})
-  const router = useRouter()
+
   const mapChores = filtered => (
     <Table>
       <thead>
@@ -27,7 +26,10 @@ const Home = () => {
         </tr>
       </thead>
       <tbody>
-        {filtered.map(c => <Chore chore={c} key={c._id} />)}
+        {filtered.map(c => { 
+          const { _id } = c
+          return <Chore chore={c} key={_id} />
+        })}
       </tbody>
     </Table>
   )
@@ -46,14 +48,14 @@ const Home = () => {
 
   return (
     <div className={page}>
-      <Tabs defaultActiveKey="current" className="mb-3">
+      <Tabs id='all' defaultActiveKey="current" className="mb-3">
         <Tab eventKey="current" title="Current Chores">
           {mapChores(chores.filter(c => !c.completed))}
         </Tab>
-        <Tab eventKey="mine" title="My Chores">
+        <Tab id='justmine' eventKey="mine" title="My Chores">
           {mapChores(chores.filter(c => !c.completed && c.assignedTo === loggedin.username))}
         </Tab>
-        <Tab eventKey="completed" title="All Completed Chores">
+        <Tab id='allcompleted' eventKey="completed" title="All Completed Chores">
           {mapChores(chores.filter(c => c.completed))}
         </Tab>
       </Tabs>
