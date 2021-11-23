@@ -1,0 +1,31 @@
+.createbutton {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  background: #3cab8a;
+  color: white;
+  border: solid 1px #dbdbdb;
+  border-radius: 5px;
+}
+
+.page {
+  padding: 1rem;
+}
+
+.flexwrapper {
+  display: flex;
+}
+
+.machinewrapper {
+  border: solid 1px #dbdbdb;
+  border-radius: 5px;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.machinewrapper p {
+  font-weight: bold;
+}
+
+.machinewrapper span {
+  font-weight: normal;
+} 
