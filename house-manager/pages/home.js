@@ -57,7 +57,7 @@ const Home = () => {
           {mapChores(chores.filter(c => c.completed))}
         </Tab>
       </Tabs>
-      <ChoreForm />
+      <NewChore />
     </div>
   )
 }

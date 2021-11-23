@@ -4,6 +4,7 @@ const express = require('express')
 const Roommate = require('../models/roommate')
 
 const router = express.Router()
+const isAuthenticated = require('../middlewares/isAuthenticated')
 
 // user logs in
 router.post('/login', async (req, res) => {
@@ -40,19 +41,20 @@ router.post('/signup', async (req, res) => {
     req.session.name = name
     res.send({ success: true })
   } catch (err) {
+    console.log(err)
     res.send('Username is already taken')
   }
 })
 
-router.post('/logout', async (req, res) => {
+router.post('/logout', isAuthenticated, async (req, res, next) => {
   req.session.name = null
   req.session.username = null
-  req.session.password = null
   req.session.house = null
   res.send('logged out')
+  next()
 })
 
-router.get('/isloggedin', (req, res) => {
+router.get('/isloggedin', async (req, res) => {
   const { username, name } = req.session
   if (username !== null && username !== '') {
     res.send({ username, name })

@@ -45,20 +45,20 @@ router.get('/joinoptions', async (req, res) => {
 
 router.post('/join', async (req, res) => {
   const { _id, password } = req.body
-  const { username: newMember } = req.session
+  const { username } = req.session
   try {
     const house = await House.findById({ _id })
     if (!house) {
       res.send("house doesn't exist")
     }
     if (house.password === password) {
-      house.members.push(newMember)
+      house.members.push(username)
       house.save(err => {
         if (err) {
           res.send('issue with joining house')
         } else {
-          req.session.house = house._id
-          addHouseToUser(req, res, newMember, _id)
+          req.session.house = _id
+          addHouseToUser(req, res, username, _id)
         }
       })
     }

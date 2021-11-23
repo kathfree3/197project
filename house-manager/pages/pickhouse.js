@@ -1,5 +1,6 @@
 // package imports
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 // local imports
 import EnterPassword from '../components/EnterHousePassword'
@@ -11,6 +12,8 @@ const PickHouse = () => {
   const [address, setAddress] = useState('')
   const [password, setPassword] = useState('')
 
+  const router = useRouter()
+  
   useEffect(() => {
     const setup = async () => {
       setHouseOptions(await getHouses())
@@ -33,7 +36,7 @@ const PickHouse = () => {
         <input value={address} type="text" onChange={e => setAddress(e.target.value)} />
         <label> House Password: </label>
         <input value={password} type="text" onChange={e => setPassword(e.target.value)} />
-        <button className={createbutton} type="button" onClick={() => createHouse(address, password)}> Create house </button>
+        <button className={createbutton} type="button" onClick={() => createHouse(router, address, password)}> Create house </button>
       </form>
     </div>
   )

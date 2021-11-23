@@ -4,8 +4,13 @@ import axios from 'axios'
 const pre = 'http://localhost:3000'
 // user log in/ log out methods
 export const logout = async router => {
-  await axios.post(`${pre}/account/logout`)
-  router.push('/login')
+  try {
+    await axios.post(`${pre}/account/logout`)
+    router.push('/login')
+  } catch (err) {
+    console.log('eee')
+    router.push('/login')
+  }
 }
 
 export const login = async (router, username, password) => {

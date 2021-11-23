@@ -1,5 +1,6 @@
 const express = require('express')
 const Chore = require('../models/chore')
+const isAuthenticated = require('../middlewares/isAuthenticated')
 
 const router = express.Router()
 
@@ -15,47 +16,13 @@ const saveChore = (res, chore) => {
 }
 
 // get all the chores for your house
-router.get('/', async (req, res) => {
+router.get('/', isAuthenticated, async (req, res, next) => {
   const { house } = req.session
   try {
     const chores = await Chore.find({ houseID: house })
     res.send(chores)
   } catch (err) {
     res.send('error getting chores')
-  }
-})
-
-// get just completed chores
-router.get('/completed', async (req, res) => {
-  const { house } = req.session
-  try {
-    const chores = await Chore.find({ houseID: house, completed: true })
-    res.send(chores)
-  } catch (err) {
-    res.send('error getting chores')
-  }
-})
-
-// get chores by not completed
-router.get('/notcompleted', async (req, res) => {
-  const { house } = req.session
-  try {
-    const chores = await Chore.find({ houseID: house, completed: false })
-    res.send(chores)
-  } catch (err) {
-    res.send('error getting chores')
-  }
-})
-
-// get a persons chores
-router.get('/:userid', async (req, res) => {
-  const { house } = req.session
-  const { userid } = req.params
-  try {
-    const chores = await Chore.find({ houseID: house, assignedTo: userid })
-    res.send(chores)
-  } catch (err) {
-    res.send('error getting users chores')
   }
 })
 
@@ -73,6 +40,7 @@ router.post('/create', async (req, res) => {
     res.send('chore has creation problems')
   }
 })
+
 
 router.post('/:id/modify', async (req, res) => {
   const { description } = req.body

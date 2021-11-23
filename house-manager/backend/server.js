@@ -46,6 +46,18 @@ nextApp.prepare().then(() => {
   app.use('/registerhouse', registerHouseRouter)
   app.use('/laundry', laundryRouter)
 
+  app.use((err, req, res, next) => {
+    if(err) {
+      if (err.status !== 200) {
+        res.status(500).send(err.message)
+      } else {
+        res.status(200).send({msg: err.message})
+      }
+    } else{
+      next()
+    }
+  })
+  
   app.all('*', (req, res) => {
     return handle(req, res)
   })
