@@ -8,10 +8,10 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import { logout, getUserLoggedin } from './routecalls'
 
 const NavBar = () => {
-  const [loggedin, setLoggedin] = useState({})
+  const [user, setUser] = useState({})
 
   useEffect(() => {
-    const setup = async () => setLoggedin(await getUserLoggedin())
+    const setup = async () => setUser(await getUserLoggedin())
     setup()
     const intervalID = setInterval(() => {
       setup()
@@ -19,7 +19,8 @@ const NavBar = () => {
     return () => clearInterval(intervalID)
   }, [])
 
-  const { name } = loggedin || ''
+
+  const { name, loggedin } = user
 
   const router = useRouter()
 
@@ -30,12 +31,14 @@ const NavBar = () => {
         <Nav.Link href="/home">Chores</Nav.Link>
         <Nav.Link href="/laundry">Laundry</Nav.Link>
       </Nav>
+      {loggedin && (
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>{`Signed in as: ${name}`}</Navbar.Text>
         <NavDropdown title="" id="nav-dropdown">
           <NavDropdown.Item onClick={() => logout(router)}> Logout</NavDropdown.Item>
         </NavDropdown>
       </Navbar.Collapse>
+      )}
     </Navbar>
   )
 }

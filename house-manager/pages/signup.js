@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 // local imports
-import { signup } from '../components/routecalls'
+import { signup, cantBeLoggedIn } from '../components/routecalls'
 import { createbutton, page } from '../styles/utils.module.css'
 
 const Signup = () => {
@@ -37,20 +37,5 @@ const Signup = () => {
 export default Signup
 
 export async function getServerSideProps(context) {
-  const { req } = context
-
-  const { username } = req.session
-
-  if (username) {
-    return {
-      redirect: {
-        destination: '/home',
-        permanent: false,
-      },
-    }
-  }
-
-  return {
-    props: { }
-  }
+  return cantBeLoggedIn(context)
 }

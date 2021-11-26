@@ -1,6 +1,6 @@
 import '../styles/globals.css'
-import SSRProvider from 'react-bootstrap/SSRProvider';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SSRProvider from 'react-bootstrap/SSRProvider';
 
 import Layout from '../components/layout'
 

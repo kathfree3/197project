@@ -8,7 +8,7 @@ import Table from 'react-bootstrap/Table'
 import { page } from '../styles/utils.module.css'
 import Chore from '../components/Chore'
 import NewChore from '../components/NewChore'
-import { getChores } from '../components/routecalls'
+import { getChores, needToBeLoggedIn } from '../components/routecalls'
 
 const Home = ({ username }) => {
   const [chores, setChores] = useState([])
@@ -63,20 +63,5 @@ const Home = ({ username }) => {
 export default Home
 
 export async function getServerSideProps(context) {
-  const { req } = context
-
-  const { username } = req.session
-
-  if (!username) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    }
-  }
-
-  return {
-    props: { username }
-  }
+  return needToBeLoggedIn(context)
 }

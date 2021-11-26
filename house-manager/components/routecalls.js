@@ -95,3 +95,41 @@ export const stopLoad = async id => {
   const { data } = await axios.post(`/laundry/finishload/${id}`)
   return data.success ? alert('Laundry taken out') : data.msg
 }
+
+
+// fcuntions for authentication 
+export const needToBeLoggedIn = async context => {
+  const { req } = context
+
+  const { username } = req.session
+
+  if (!username) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: { username }
+  }
+}
+
+export const cantBeLoggedIn = async context => {
+  const { req } = context
+  const { username } = req.session
+
+  if (username) {
+    return {
+      redirect: {
+        destination: '/home',
+        permanent: false,
+      },
+    }
+  }
+  return {
+    props: { }
+  }
+}

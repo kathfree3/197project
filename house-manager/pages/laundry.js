@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react'
 import { page, flexwrapper } from '../styles/utils.module.css'
 import LaundryMachine from '../components/LaundryMachine'
 import NewMachine from '../components/NewMachine'
-import { getMachines } from '../components/routecalls'
+import { getMachines, needToBeLoggedIn } from '../components/routecalls'
 
 const LaundryPage = () => {
   const [machines, setMachines] = useState([])
@@ -48,20 +48,5 @@ const LaundryPage = () => {
 export default LaundryPage
 
 export async function getServerSideProps(context) {
-  const { req } = context
-
-  const { username } = req.session
-
-  if (!username) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    }
-  }
-
-  return {
-    props: { }
-  }
+  return needToBeLoggedIn(context)
 }
