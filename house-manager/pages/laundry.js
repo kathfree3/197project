@@ -46,3 +46,22 @@ const LaundryPage = () => {
 }
 
 export default LaundryPage
+
+export async function getServerSideProps(context) {
+  const { req } = context
+
+  const { username } = req.session
+
+  if (!username) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: { }
+  }
+}

@@ -54,6 +54,15 @@ router.post('/logout', isAuthenticated, async (req, res, next) => {
   next()
 })
 
+router.get('/userloggedin', async (req, res) => {
+  const { username } = req.session
+  if (username !== null && username !== '') {
+    res.send({ username: username })
+  } else {
+    res.send({ loggedin: 'false' })
+  }
+})
+
 router.get('/isloggedin', async (req, res) => {
   const { username, name } = req.session
   if (username !== null && username !== '') {

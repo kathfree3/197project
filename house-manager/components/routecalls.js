@@ -15,7 +15,6 @@ export const logout = async router => {
 
 export const login = async (router, username, password) => {
   const { data } = await axios.post(`${pre}/account/login`, { username, password })
-  const { e } = await getUserLoggedin()
   return data.success ? router.push('/home') : alert(data)
 }
 
@@ -27,6 +26,11 @@ export const signup = async (router, name, username, password) => {
 export const getUserLoggedin = async () => {
   const { data } = await axios.get(`${pre}/account/isloggedin`)
   return data
+}
+
+export const whoLoggedIn = async () => {
+  const { data } = await axios.get(`${pre}/account/userloggedin`)
+  return data.loggedin
 }
 
 // From the register house router

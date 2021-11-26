@@ -26,18 +26,16 @@ const NavBar = () => {
   return (
     <Navbar bg="dark" variant="dark" style={{ padding: '1rem' }}>
       <Navbar.Brand>House Manager</Navbar.Brand>
-      <>
-        <Nav className="me-auto">
-          <Nav.Link href="/home">Chores</Nav.Link>
-          <Nav.Link href="/laundry">Laundry</Nav.Link>
-        </Nav>
-        <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>{`Signed in as: ${name}`}</Navbar.Text>
-          <NavDropdown title="" id="nav-dropdown">
-            <NavDropdown.Item onClick={() => logout(router)}> Logout</NavDropdown.Item>
-          </NavDropdown>
-        </Navbar.Collapse>
-      </>
+      <Nav className="me-auto">
+        <Nav.Link href="/home">Chores</Nav.Link>
+        <Nav.Link href="/laundry">Laundry</Nav.Link>
+      </Nav>
+      <Navbar.Collapse className="justify-content-end">
+        <Navbar.Text>{`Signed in as: ${name}`}</Navbar.Text>
+        <NavDropdown title="" id="nav-dropdown">
+          <NavDropdown.Item onClick={() => logout(router)}> Logout</NavDropdown.Item>
+        </NavDropdown>
+      </Navbar.Collapse>
     </Navbar>
   )
 }

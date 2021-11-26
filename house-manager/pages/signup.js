@@ -35,3 +35,22 @@ const Signup = () => {
 }
 
 export default Signup
+
+export async function getServerSideProps(context) {
+  const { req } = context
+
+  const { username } = req.session
+
+  if (username) {
+    return {
+      redirect: {
+        destination: '/home',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: { }
+  }
+}

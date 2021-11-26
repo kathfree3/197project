@@ -8,11 +8,10 @@ import Table from 'react-bootstrap/Table'
 import { page } from '../styles/utils.module.css'
 import Chore from '../components/Chore'
 import NewChore from '../components/NewChore'
-import { getChores, getUserLoggedin } from '../components/routecalls'
+import { getChores } from '../components/routecalls'
 
-const Home = () => {
+const Home = ({ username }) => {
   const [chores, setChores] = useState([])
-  const [loggedin, setLoggedin] = useState({})
 
   const mapChores = filtered => (
     <Table>
@@ -35,10 +34,7 @@ const Home = () => {
   )
 
   useEffect(() => {
-    const setup = async () => {
-      setChores(await getChores())
-      setLoggedin(await getUserLoggedin())
-    }
+    const setup = async () => setChores(await getChores())
     setup()
     const intervalID = setInterval(() => {
       setup()
@@ -53,7 +49,7 @@ const Home = () => {
           {mapChores(chores.filter(c => !c.completed))}
         </Tab>
         <Tab id='justmine' eventKey="mine" title="My Chores">
-          {mapChores(chores.filter(c => !c.completed && c.assignedTo === loggedin.username))}
+          {mapChores(chores.filter(c => !c.completed && c.assignedTo === username))}
         </Tab>
         <Tab id='allcompleted' eventKey="completed" title="All Completed Chores">
           {mapChores(chores.filter(c => c.completed))}
@@ -65,3 +61,22 @@ const Home = () => {
 }
 
 export default Home
+
+export async function getServerSideProps(context) {
+  const { req } = context
+
+  const { username } = req.session
+
+  if (!username) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: { username }
+  }
+}
