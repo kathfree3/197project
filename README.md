@@ -1,4 +1,4 @@
-MS1
+### Accomplished for Project MS1
 - A user can register for an account/ login
 - When a user signs up they can either create a new house to join, or join an existing one as long as they have the associated password 
 - once logged in a user can view chores for their house or create new ones
@@ -18,3 +18,31 @@ Still need to do
 - should only be able to access certain pages if you are logged in/ logged out
 
 Not sure if the readme should have been more formal and detailed but this is basically what i have done so far!
+
+
+Feature list (detailed view into what users will be able to do on your application)
+
+Milestone breakdown (what features you will accomplish by which milestone)
+
+
+## Roommate House Manager Application 
+
+### Overview 
+description of what you hope to build and what your project will accomplish
+
+### Technologies
+Technologies/frameworks/libraries needed or used
+
+State management
+React hooks/ life cycle methods
+Routing
+Styling/ Design
+Backend (35 points)
+
+Main areas that we are looking for
+
+Express Server
+Session management
+API endpoints
+MongoDB Integration
+Technicality (10 points)
