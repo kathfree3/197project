@@ -7,6 +7,14 @@
   border-radius: 5px;
 }
 
+.editbutton {
+  padding: 0;
+  margin: 0;
+  background: white;
+  border: none;
+  color: #585754;
+}
+
 .button {
   padding: 0.5rem;
   margin: 1rem 0rem;

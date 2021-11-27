@@ -21,7 +21,7 @@ const Home = ({ username }) => {
           <th>Description</th>
           <th>Assigned To</th>
           <th>Completed?</th>
-          <th> </th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -42,17 +42,29 @@ const Home = ({ username }) => {
     return () => clearInterval(intervalID)
   }, [])
 
+  
+  
+  const done = (c, wanted) => {
+    const { completed } = c
+    return completed === wanted
+  }
+
+  const myChores = c => {
+    const { assignedTo } = c
+    return assignedTo === username
+  }
+
   return (
     <div className={page}>
       <Tabs id='all' defaultActiveKey="current" className="mb-3">
         <Tab eventKey="current" title="Current Chores">
-          {mapChores(chores.filter(c => !c.completed))}
+          {mapChores(chores.filter(c => done(c, false)))}
         </Tab>
         <Tab id='justmine' eventKey="mine" title="My Chores">
-          {mapChores(chores.filter(c => !c.completed && c.assignedTo === username))}
+          {mapChores(chores.filter(c => done(c, false) && myChores(c)))}
         </Tab>
         <Tab id='allcompleted' eventKey="completed" title="All Completed Chores">
-          {mapChores(chores.filter(c => c.completed))}
+          {mapChores(chores.filter(c => done(c, true)))}
         </Tab>
       </Tabs>
       <NewChore />

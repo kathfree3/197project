@@ -21,6 +21,11 @@ const NewChore = () => {
     setAssignedTo('None')
   }
 
+  const create = () => {
+    newChore(assignedTo, task, description)
+    close()
+  }
+
   useEffect(() => {
     const setup = async () => setAssignOptions([...await getRoomates(), 'None'])
     setup()
@@ -51,7 +56,7 @@ const NewChore = () => {
           </Dropdown>
         </Modal.Body>
         <Modal.Footer> 
-          <button onClick={() => newChore(assignedTo, task, description)}> Create </button>
+          <button onClick={() => create()}> Create </button>
           <button onClick={() => close()}> Close </button>
         </ Modal.Footer> 
       </Modal>

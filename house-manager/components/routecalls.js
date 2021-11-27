@@ -59,9 +59,9 @@ export const toggle = async id => {
   await axios.post(`${pre}/chores/${id}/togglecomplete`)
 }
 
-export const newChore = async (router, assignedTo, task, description) => {
+export const newChore = async (assignedTo, task, description) => {
   const { data } = await axios.post(`${pre}/chores/create`, { assignedTo, task, description })
-  return data.success ? navigate('/home') : alert(data)
+  return data.success ? alert('Created Chore') : alert('Not a success')
 }
 
 export const assignChore = async (choreID, assignTo) => {

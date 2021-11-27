@@ -26,6 +26,7 @@ router.get('/', isAuthenticated, async (req, res, next) => {
   }
 })
 
+
 // create a chore
 router.post('/create', async (req, res) => {
   const { assignedTo, task, description } = req.body
@@ -35,7 +36,7 @@ router.post('/create', async (req, res) => {
     await Chore.create({
       houseID, assignedTo, completed, task, description,
     })
-    res.send({ succes: true })
+    res.send({ success: true })
   } catch (err) {
     res.send('chore has creation problems')
   }
