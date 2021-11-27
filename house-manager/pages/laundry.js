@@ -19,7 +19,6 @@ const LaundryPage = () => {
     return () => clearInterval(intervalID)
   }, [])
 
-
   const check = (m, t) => {
     const { type } = m
     return t === type

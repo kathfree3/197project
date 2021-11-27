@@ -41,7 +41,6 @@ router.post('/signup', async (req, res) => {
     req.session.name = name
     res.send({ success: true })
   } catch (err) {
-    console.log(err)
     res.send('Username is already taken')
   }
 })
@@ -57,7 +56,7 @@ router.post('/logout', isAuthenticated, async (req, res, next) => {
 router.get('/userloggedin', async (req, res) => {
   const { username } = req.session
   if (username !== null && username !== '') {
-    res.send({ username: username })
+    res.send({ username })
   } else {
     res.send({ loggedin: 'false' })
   }

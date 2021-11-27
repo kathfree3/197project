@@ -24,13 +24,13 @@ const LaundryMachine = ({ machine }) => {
         return (
           <>
             <span> Load is over!</span>
-            <button onClick={() => stopLoad(_id)}> Take out </button>
+            <button type="button" onClick={() => stopLoad(_id)}> Take out </button>
           </>
         )
       }
       return `Over in ${timeLeft} minutes`
     }
-    return <button onClick={() => startLoad(_id)}> Start Load </button>
+    return <button type="button" onClick={() => startLoad(_id)}> Start Load </button>
   }
 
   return (

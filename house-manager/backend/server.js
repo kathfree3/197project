@@ -11,7 +11,7 @@ const myhouseRouter = require('./routes/myhouse')
 const registerHouseRouter = require('./routes/registerHouse')
 const laundryRouter = require('./routes/laundry')
 
-// not sure 
+// not sure
 const port = process.env.PORT || 3000
 const dev = process.env.NODE_ENV !== 'production'
 
@@ -46,21 +46,19 @@ nextApp.prepare().then(() => {
   app.use('/registerhouse', registerHouseRouter)
   app.use('/laundry', laundryRouter)
 
-  app.use((err, req, res, next) => {
-    if(err) {
+  app.use((err, req, res, nextCall) => {
+    if (err) {
       if (err.status !== 200) {
         res.status(500).send(err.message)
       } else {
-        res.status(200).send({msg: err.message})
+        res.status(200).send({ msg: err.message })
       }
-    } else{
-      next()
+    } else {
+      nextCall()
     }
   })
-  
-  app.all('*', (req, res) => {
-    return handle(req, res)
-  })
+
+  app.all('*', (req, res) => handle(req, res))
 
   app.listen(port, () => {
     // eslint-disable-next-line no-console

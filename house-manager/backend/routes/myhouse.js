@@ -6,7 +6,6 @@ const router = express.Router()
 // get all info about a hoes
 router.get('/', async (req, res) => {
   const { house } = req.session
-  console.log(house)
   try {
     const home = await House.findById({ _id: house })
     res.send(home)

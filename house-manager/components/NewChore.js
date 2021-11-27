@@ -33,7 +33,7 @@ const NewChore = () => {
 
   return (
     <>
-      <button className={createbutton} onClick={() => setShow(true)}> New Chore </button>
+      <button type="button" className={createbutton} onClick={() => setShow(true)}> New Chore </button>
       <Modal centered show={show} onHide={() => close()} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title> New Chore </Modal.Title>
@@ -55,10 +55,10 @@ const NewChore = () => {
             </Dropdown.Menu>
           </Dropdown>
         </Modal.Body>
-        <Modal.Footer> 
-          <button onClick={() => create()}> Create </button>
-          <button onClick={() => close()}> Close </button>
-        </ Modal.Footer> 
+        <Modal.Footer>
+          <button type="button" onClick={() => create()}> Create </button>
+          <button type="button" onClick={() => close()}> Close </button>
+        </Modal.Footer>
       </Modal>
     </>
   )

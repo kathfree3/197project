@@ -11,8 +11,8 @@ const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const router = useRouter() 
-  
+  const router = useRouter()
+
   return (
     <div className={page}>
       <form>
@@ -21,7 +21,7 @@ const Login = () => {
         <input value={username} type="text" onChange={e => setUsername(e.target.value)} />
         <label> Password: </label>
         <input value={password} type="text" onChange={e => setPassword(e.target.value)} />
-        <button className={button} type='button' onClick={() => login(router, username, password)}> Login </button>
+        <button className={button} type="button" onClick={() => login(router, username, password)}> Login </button>
         <p>
           {'Dont have an account? '}
           <Link href="/signup">Sign up!</Link>

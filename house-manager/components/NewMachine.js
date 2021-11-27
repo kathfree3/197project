@@ -26,12 +26,12 @@ const NewMachine = () => {
 
   return (
     <>
-      <button className={createbutton} onClick={() => setShow(true)}> Register New Machine </button>
+      <button type="button" className={createbutton} onClick={() => setShow(true)}> Register New Machine </button>
       <Modal centered show={show} onHide={() => close()} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title> New Laundry Machine </Modal.Title>
         </Modal.Header>
-        <Modal.Body >
+        <Modal.Body>
           <label> Type: </label>
           <Dropdown>
             <Dropdown.Toggle variant="success">{type}</Dropdown.Toggle>
@@ -42,12 +42,12 @@ const NewMachine = () => {
             </Dropdown.Menu>
           </Dropdown>
           <label> Duration (in minutes): </label>
-          <input value={duration} type="text" onChange={e => setDuration(e.target.value)} /> 
+          <input value={duration} type="text" onChange={e => setDuration(e.target.value)} />
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={() => createClicked()}> Create </button>
-          <button onClick={() => close()}> Close </button>
-        </Modal.Footer> 
+          <button type="button" onClick={() => createClicked()}> Create </button>
+          <button type="button" onClick={() => close()}> Close </button>
+        </Modal.Footer>
       </Modal>
     </>
   )

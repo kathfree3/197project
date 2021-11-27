@@ -1,15 +1,18 @@
+import React from 'react'
+import SSRProvider from 'react-bootstrap/SSRProvider'
+
+// style
 import '../styles/globals.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import SSRProvider from 'react-bootstrap/SSRProvider';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 import Layout from '../components/layout'
 
 function MyApp({ Component, pageProps }) {
   return (
     <SSRProvider>
-      <Layout >
+      <Layout>
         <Component {...pageProps} />
-      </ Layout>
+      </Layout>
     </SSRProvider>
   )
 }

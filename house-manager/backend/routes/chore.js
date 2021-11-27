@@ -26,7 +26,6 @@ router.get('/', isAuthenticated, async (req, res, next) => {
   }
 })
 
-
 // create a chore
 router.post('/create', async (req, res) => {
   const { assignedTo, task, description } = req.body
@@ -42,7 +41,6 @@ router.post('/create', async (req, res) => {
   }
 })
 
-
 router.post('/:id/modify', async (req, res) => {
   const { description } = req.body
   const { id } = req.params
@@ -51,7 +49,6 @@ router.post('/:id/modify', async (req, res) => {
     chore.description = description
     saveChore(chore)
   } catch (err) {
-    console.log(err)
     res.send({ success: false })
   }
 })

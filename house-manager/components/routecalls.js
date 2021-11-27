@@ -8,7 +8,6 @@ export const logout = async router => {
     await axios.post(`${pre}/account/logout`)
     router.push('/login')
   } catch (err) {
-    console.log('eee')
     router.push('/login')
   }
 }
@@ -96,8 +95,7 @@ export const stopLoad = async id => {
   return data.success ? alert('Laundry taken out') : data.msg
 }
 
-
-// fcuntions for authentication 
+// fcuntions for authentication
 export const needToBeLoggedIn = async context => {
   const { req } = context
 
@@ -113,7 +111,7 @@ export const needToBeLoggedIn = async context => {
   }
 
   return {
-    props: { username }
+    props: { username },
   }
 }
 
@@ -130,6 +128,6 @@ export const cantBeLoggedIn = async context => {
     }
   }
   return {
-    props: { }
+    props: { },
   }
 }

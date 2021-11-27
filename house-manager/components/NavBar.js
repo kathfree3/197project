@@ -1,5 +1,5 @@
 // package imports
-import React, {useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -18,7 +18,6 @@ const NavBar = () => {
     }, 2000)
     return () => clearInterval(intervalID)
   }, [])
-
 
   const { name, loggedin } = user
 
@@ -44,4 +43,3 @@ const NavBar = () => {
 }
 
 export default NavBar
-

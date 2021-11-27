@@ -22,7 +22,7 @@ const EnterPassword = ({ house }) => {
 
   return (
     <>
-      <button onClick={() => setShow(true)}> Join </button>
+      <button type="button" onClick={() => setShow(true)}> Join </button>
       <Modal centered show={show} onHide={() => close()} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title>{`Enter Password to join: ${house.address}`}</Modal.Title>
@@ -31,8 +31,8 @@ const EnterPassword = ({ house }) => {
           <input type="text" value={password} onChange={e => setPassword(e.target.value)} />
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={() => joinHouse(router, _id, password)}> Join </button>
-          <button onClick={() => close()}> Close </button>
+          <button type="button" onClick={() => joinHouse(router, _id, password)}> Join </button>
+          <button type="button" onClick={() => close()}> Close </button>
         </Modal.Footer>
       </Modal>
     </>
