@@ -4,7 +4,11 @@ import moment from 'moment'
 
 // local imports
 import { stopLoad, startLoad } from './routecalls'
-import { machinewrapper } from '../styles/utils.module.css'
+import {
+  machinewrapper, start, takeout, running,
+} from '../styles/utils.module.css'
+
+import { Eject, Timer, PlayButton } from '../public/icons'
 
 const LaundryMachine = ({ machine }) => {
   const {
@@ -23,23 +27,39 @@ const LaundryMachine = ({ machine }) => {
       if (timeLeft === 0) {
         return (
           <>
-            <span> Load is over!</span>
-            <button type="button" onClick={() => stopLoad(_id)}> Take out </button>
+            <p><span>Load is over!</span></p>
+            <button className={takeout} type="button" onClick={() => stopLoad(_id)}>
+              {'Take out '}
+              <Eject />
+            </button>
           </>
         )
       }
-      return `Over in ${timeLeft} minutes`
+      return (
+        <div className={running}>
+          <Timer />
+          {` ${timeLeft} minutes left`}
+        </div>
+      )
     }
-    return <button type="button" onClick={() => startLoad(_id)}> Start Load </button>
+    return (
+      <>
+        <p><span>{`Takes: ${duration} minutes`}</span></p>
+        <button className={start} type="button" onClick={() => startLoad(_id)}>
+          {'Start Load '}
+          <PlayButton />
+        </button>
+      </>
+    )
   }
 
   return (
-    <div id={_id} className={machinewrapper}>
+    <div className={machinewrapper}>
+      <h2>{`${type}`}</h2>
       <p>
-        {`${type}: `}
-        <span>{`Takes: ${duration} minutes`}</span>
+        {`Status: `}
+        <span>{inUse ? 'In Use' : 'Empty'}</span>
       </p>
-      <p>{`Status: ${inUse ? 'In Use' : 'Empty'} `}</p>
       {show()}
     </div>
   )

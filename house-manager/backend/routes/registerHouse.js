@@ -49,21 +49,16 @@ router.post('/join', async (req, res) => {
   try {
     const house = await House.findById({ _id })
     if (!house) {
-      res.send("house doesn't exist")
+      return res.send("house doesn't exist")
     }
     if (house.password === password) {
       house.members.push(username)
-      house.save(err => {
-        if (err) {
-          res.send('issue with joining house')
-        } else {
-          req.session.house = _id
-          addHouseToUser(req, res, username, _id)
-        }
-      })
+      house.save()
+      return addHouseToUser(req, res, username, _id)
     }
+    return res.send('Wrong Password')
   } catch (err) {
-    res.send('Error joining house')
+    return res.send('Error joining house')
   }
 })
 

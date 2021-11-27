@@ -1,10 +1,25 @@
+form {
+  display: flex;
+  margin: auto;
+  margin-bottom: 0.5rem;
+  flex-direction: column;
+  padding: 1rem;
+  width: 40%;
+  float: left;
+}
+
 button {
   padding: 0.5rem;
   margin: 1rem;
   background: #696eb3;
   color: white;
   border: solid 1px #dbdbdb;
-  border-radius: 5px;
+  border-radius: 5px!important;
+}
+
+form button {
+  display: block;
+  width: 40%;
 }
 
 input {
@@ -19,12 +34,4 @@ label {
   margin: 0.25rem 0rem;
 }
 
-form {
-  display: flex;
-  margin: auto;
-  margin-bottom: 0.5rem;
-  flex-direction: column;
-  padding: 1rem;
-  width: 40%;
-  float: left;
-}
+

@@ -1,12 +1,11 @@
-// routes to handle the log in/ sign up system
-
+// Router for the laundry
 const express = require('express')
 const moment = require('moment')
 
-const router = express.Router()
-
 const Laundry = require('../models/laundry')
 const House = require('../models/house')
+
+const router = express.Router()
 
 // helper function
 const addLaundryToHouse = async (req, res, id) => {

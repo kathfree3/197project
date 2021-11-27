@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 // local imports
 import { login, cantBeLoggedIn } from '../components/routecalls'
-import { page, button } from '../styles/utils.module.css'
+import { page } from '../styles/utils.module.css'
 
 const Login = () => {
   const [username, setUsername] = useState('')
@@ -21,7 +21,8 @@ const Login = () => {
         <input value={username} type="text" onChange={e => setUsername(e.target.value)} />
         <label> Password: </label>
         <input value={password} type="text" onChange={e => setPassword(e.target.value)} />
-        <button className={button} type="button" onClick={() => login(router, username, password)}> Login </button>
+        <br />
+        <button type="button" onClick={() => login(router, username, password)}> Login </button>
         <p>
           {'Dont have an account? '}
           <Link href="/signup">Sign up!</Link>
