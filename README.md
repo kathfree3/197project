@@ -1,23 +1,30 @@
 ### Accomplished for Project MS1
 - A user can register for an account/ login
 - When a user signs up they can either create a new house to join, or join an existing one as long as they have the associated password 
-- once logged in a user can view chores for their house or create new ones
-- made a button for if a chore is completed or not so it disapears from the current chores section
-- basic laundry set up
-  - can register new machines and they can only be of type washer or dryer
-  - can start a load, view how much time is left on a load, and "take the load out" 
-  - used a packaged called motion to manipulate the timestamp/ date fields on the laundry
+- Once logged in a user can view chores tagged for their house, or they have an option to create new chores
+- A user can mark a chore as completed, and this will cause it to disapear from the current chores section
+- Basic Laundry Set up
+  - User can register new machines for their house
+  - Machines can only be of type washer or dryer
+  - User can start a load, view how much time is left on a load, and "take the load out" 
+  - Used a packaged called motion to manipulate the timestamp/ date fields on the laundry
 
 
-Still need to do
-- if a chore is unassigned, have a way to modify it to assign it to someone/ if you want to unclaim a chore you should be able to as well
-- not really a lot of error checking right now its pretty messy so i need to set that up
-- the nav bar is kind of messy/ need to clean that up
-- incorporate NextJS
-- more styling
-- should only be able to access certain pages if you are logged in/ logged out
+### Accomplished for Project MS2
+Backend
+- Needed to clean up routes for creating/ joining houses so proper error messages would be displayed
 
-Not sure if the readme should have been more formal and detailed but this is basically what i have done so far!
+Navigation/ Navigation Bar
+- Will only display the page options if someone is logged in
+- Routes are authenticated so if someone tries to access the chores page but they are not logged in, they will be redirected to the login page
+- Similarly, if you are logged in you cannot access the login/ signup pages
+
+Overall
+- Restructured the the project so its using NextJS
+  - Had to change the folder layout as well as the server.js for the backend so it starts up the backend/ frontend at the same time with the Next package
+
+Chores
+- User can now modify a chore to assign/ reassign it to someone else!
 
 
 Feature list (detailed view into what users will be able to do on your application)
