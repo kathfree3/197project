@@ -1,11 +1,14 @@
 const express = require('express')
+
+// local
 const House = require('../models/house')
 const Roommate = require('../models/roommate')
+const isAuthenticated = require('../middlewares/isAuthenticated')
 
 const router = express.Router()
 
 // get all info about a hoes
-router.get('/', async (req, res) => {
+router.get('/', isAuthenticated, async (req, res) => {
   const { house } = req.session
   try {
     const home = await House.findById({ _id: house })
@@ -16,7 +19,7 @@ router.get('/', async (req, res) => {
 })
 
 // get all members in a house
-router.get('/members', async (req, res) => {
+router.get('/members', isAuthenticated, async (req, res) => {
   const { house } = req.session
   try {
     const { members } = await House.findById({ _id: house }, 'members')

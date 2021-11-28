@@ -4,6 +4,7 @@ const moment = require('moment')
 
 const Laundry = require('../models/laundry')
 const House = require('../models/house')
+const isAuthenticated = require('../middlewares/isAuthenticated')
 
 const router = express.Router()
 
@@ -22,7 +23,7 @@ const addLaundryToHouse = async (req, res, id) => {
 }
 
 // create a laundry object & add it to houes
-router.post('/create', async (req, res) => {
+router.post('/create', isAuthenticated, async (req, res) => {
   const { type, duration } = req.body
   const { house } = req.session
   if (type !== 'Washer' && type !== 'Dryer') {
@@ -37,7 +38,7 @@ router.post('/create', async (req, res) => {
 })
 
 // get laundry machines for a given house
-router.get('/viewall', async (req, res) => {
+router.get('/viewall', isAuthenticated, async (req, res) => {
   const { house } = req.session
   try {
     const machines = await Laundry.find({ houseID: house })
@@ -48,7 +49,7 @@ router.get('/viewall', async (req, res) => {
 })
 
 // start a load
-router.post('/startload/:id', async (req, res) => {
+router.post('/startload/:id', isAuthenticated, async (req, res) => {
   const { id } = req.params
   try {
     const laundry = await Laundry.findById(id)
@@ -69,7 +70,7 @@ router.post('/startload/:id', async (req, res) => {
 })
 
 // finish a load
-router.post('/finishload/:id', async (req, res) => {
+router.post('/finishload/:id', isAuthenticated, async (req, res) => {
   const { id } = req.params
   try {
     const laundry = await Laundry.findById(id)

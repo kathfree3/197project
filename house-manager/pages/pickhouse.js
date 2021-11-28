@@ -24,7 +24,7 @@ const PickHouse = () => {
       <h3> Pick a house </h3>
       {houseOptions.map(h => (
         <div key={h._id}>
-          {h.address}
+          {`${h.address}   `}
           <EnterPassword house={h} />
         </div>
       ))}
@@ -34,8 +34,14 @@ const PickHouse = () => {
         <input value={address} type="text" onChange={e => setAddress(e.target.value)} />
         <label> House Password: </label>
         <input value={password} type="text" onChange={e => setPassword(e.target.value)} />
+        <button
+          type="button"
+          className={createbutton}
+          onClick={() => createHouse(router, address, password)}
+        >
+          Create house
+        </button>
       </form>
-      <button type="button" className={createbutton} onClick={() => createHouse(router, address, password)}> Create house </button>
     </div>
   )
 }

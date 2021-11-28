@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
 
+// style imports
 import { toggleDropDown } from '../styles/utils.module.css'
 
 const AssignOptions = ({ roommates, assignedTo, setAssignedUser }) => {

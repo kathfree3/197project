@@ -32,7 +32,7 @@ export const getHouses = async () => {
 }
 
 export const createHouse = async (router, address, password) => {
-  const { data } = await axios.post(`$/registerhouse/create`, { address, password })
+  const { data } = await axios.post(`/registerhouse/create`, { address, password })
   return data.success ? router.push('/home') : alert(data.msg)
 }
 

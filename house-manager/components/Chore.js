@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 // local imports
 import AssignOptions from './AssignOptions'
 import { toggle, assignChore } from './routecalls'
+
+// style
 import { editbutton } from '../styles/utils.module.css'
 import { EditIcon } from '../public/icons'
 

@@ -1,8 +1,8 @@
+// package imports
 const express = require('express')
 const mongoose = require('mongoose')
 const session = require('cookie-session')
 const next = require('next')
-const path = require('path')
 
 // routers
 const accountRouter = require('./routes/account')
@@ -11,11 +11,9 @@ const myhouseRouter = require('./routes/myhouse')
 const registerHouseRouter = require('./routes/registerHouse')
 const laundryRouter = require('./routes/laundry')
 
-// not sure
+// define nextjs app
 const port = process.env.PORT || 3000
 const dev = process.env.NODE_ENV !== 'production'
-
-// define app
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()
 
@@ -30,8 +28,7 @@ mongoose.connect(MONGO_URI, {
 
 nextApp.prepare().then(() => {
   const app = express()
-  // use json parser
-  app.use(express.json())
+  app.use(express.json()) // use json parser
 
   // set up cookie session
   app.use(session({

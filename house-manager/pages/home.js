@@ -15,7 +15,7 @@ const Home = ({ username }) => {
   const [roommates, setRoommates] = useState([])
 
   const mapChores = filtered => (
-    <Table>
+    <Table striped>
       <thead>
         <tr>
           <th>Task</th>

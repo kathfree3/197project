@@ -31,10 +31,12 @@ const LaundryPage = () => {
 
   return (
     <div className={page}>
+      {machines && (
       <div className={flexwrapper}>
         <div className={expand}>{machines.filter(m => check(m, 'Washer')).map(m => mapM(m))}</div>
         <div className={expand}>{machines.filter(m => check(m, 'Dryer')).map(m => mapM(m))}</div>
       </div>
+      )}
       <NewMachine />
     </div>
   )

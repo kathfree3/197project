@@ -1,4 +1,6 @@
 const express = require('express')
+
+// local
 const Chore = require('../models/chore')
 const isAuthenticated = require('../middlewares/isAuthenticated')
 
@@ -27,7 +29,7 @@ router.get('/', isAuthenticated, async (req, res, next) => {
 })
 
 // create a chore
-router.post('/create', async (req, res) => {
+router.post('/create', isAuthenticated, async (req, res) => {
   const { assignedTo, task, description } = req.body
   const houseID = req.session.house
   const completed = false
@@ -41,19 +43,7 @@ router.post('/create', async (req, res) => {
   }
 })
 
-router.post('/:id/modify', async (req, res) => {
-  const { description } = req.body
-  const { id } = req.params
-  try {
-    const chore = await Chore.findById(id)
-    chore.description = description
-    saveChore(chore)
-  } catch (err) {
-    res.send({ success: false })
-  }
-})
-
-router.post('/:id/assign', async (req, res) => {
+router.post('/:id/assign', isAuthenticated, async (req, res) => {
   const { id } = req.params
   const { assignTo } = req.body
   try {
@@ -66,7 +56,7 @@ router.post('/:id/assign', async (req, res) => {
 })
 
 // route for toggling a chore completed or not
-router.post('/:id/togglecomplete', async (req, res) => {
+router.post('/:id/togglecomplete', isAuthenticated, async (req, res) => {
   const { id } = req.params
   try {
     const chore = await Chore.findById(id)
