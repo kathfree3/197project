@@ -8,10 +8,11 @@ import Table from 'react-bootstrap/Table'
 import { page } from '../styles/utils.module.css'
 import Chore from '../components/Chore'
 import NewChore from '../components/NewChore'
-import { getChores, needToBeLoggedIn } from '../components/routecalls'
+import { getChores, needToBeLoggedIn, getRoomates } from '../components/routecalls'
 
 const Home = ({ username }) => {
   const [chores, setChores] = useState([])
+  const [roommates, setRoommates] = useState([])
 
   const mapChores = filtered => (
     <Table>
@@ -27,14 +28,17 @@ const Home = ({ username }) => {
       <tbody>
         {filtered.map(c => {
           const { _id } = c
-          return <Chore chore={c} key={_id} />
+          return <Chore chore={c} key={_id} roommates={roommates} />
         })}
       </tbody>
     </Table>
   )
 
   useEffect(() => {
-    const setup = async () => setChores(await getChores())
+    const setup = async () => {
+      setChores(await getChores())
+      setRoommates(await getRoomates())
+    }
     setup()
     const intervalID = setInterval(() => {
       setup()
@@ -57,6 +61,7 @@ const Home = ({ username }) => {
       <Tabs id="all" defaultActiveKey="current" className="mb-3">
         <Tab eventKey="current" title="Current Chores">
           {mapChores(chores.filter(c => done(c, false)))}
+          <NewChore roommates={roommates} />
         </Tab>
         <Tab id="justmine" eventKey="mine" title="My Chores">
           {mapChores(chores.filter(c => done(c, false) && myChores(c)))}
@@ -65,7 +70,6 @@ const Home = ({ username }) => {
           {mapChores(chores.filter(c => done(c, true)))}
         </Tab>
       </Tabs>
-      <NewChore />
     </div>
   )
 }

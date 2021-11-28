@@ -1,30 +1,23 @@
 // package imports
-import React, { useState, useEffect } from 'react'
-import Dropdown from 'react-bootstrap/Dropdown'
+import React, { useState } from 'react'
 
 // local imports
-import { toggle, getRoomates, assignChore } from './routecalls'
+import AssignOptions from './AssignOptions'
+import { toggle, assignChore } from './routecalls'
 import { editbutton } from '../styles/utils.module.css'
 import { EditIcon } from '../public/icons'
 
-const Chore = ({ chore }) => {
+const Chore = ({ chore, roommates }) => {
   const {
     _id, task, description, assignedTo, completed,
   } = chore
 
   const [editMode, setEditMode] = useState(false)
-
-  const [reassign, setReassign] = useState(assignedTo)
-  const [assignOptions, setAssignOptions] = useState([])
-
-  useEffect(() => {
-    const setup = async () => setAssignOptions([...await getRoomates(), 'None'])
-    setup()
-  }, [])
+  const [reassignUser, setReassignUser] = useState(assignedTo)
 
   const click = () => {
     if (editMode) {
-      assignChore(_id, reassign)
+      assignChore(_id, reassignUser)
     }
     setEditMode(!editMode)
   }
@@ -33,16 +26,7 @@ const Chore = ({ chore }) => {
     if (!editMode) {
       return assignedTo
     }
-    return (
-      <Dropdown>
-        <Dropdown.Toggle>{reassign}</Dropdown.Toggle>
-        <Dropdown.Menu>
-          {assignOptions.map(a => (
-            <Dropdown.Item key={a} onClick={() => setReassign(a)}>{a}</Dropdown.Item>
-          ))}
-        </Dropdown.Menu>
-      </Dropdown>
-    )
+    return <AssignOptions roommates={roommates} assignedTo={reassignUser} setAssignedUser={setReassignUser} />
   }
 
   return (

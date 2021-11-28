@@ -15,6 +15,11 @@
   color: #585754;
 }
 
+.toggleDropDown {
+  background: #4286df!important;
+  border:none;
+}
+
 .start {
   padding: 0;
   margin: 0;
@@ -39,7 +44,7 @@
   border: none;
 }
 
-.logoutButton {
+.logoutLink {
   padding: 0;
   margin: 0rem 1rem;
   background: none;

@@ -1,16 +1,15 @@
 // package imports
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
-import Dropdown from 'react-bootstrap/Dropdown'
 
 // local imports
-import { newChore, getRoomates } from './routecalls'
+import AssignOptions from './AssignOptions'
+import { newChore } from './routecalls'
 import { createbutton, full } from '../styles/utils.module.css'
 
-const NewChore = () => {
+const NewChore = ({ roommates }) => {
   const [show, setShow] = useState(false)
-  const [assignedTo, setAssignedTo] = useState('None')
-  const [assignOptions, setAssignOptions] = useState([])
+  const [assignedUser, setAssignedUser] = useState('None')
   const [task, setTask] = useState('')
   const [description, setDescription] = useState('')
 
@@ -18,18 +17,13 @@ const NewChore = () => {
     setShow(false)
     setTask('')
     setDescription('')
-    setAssignedTo('None')
+    setAssignedUser('None')
   }
 
   const create = () => {
-    newChore(assignedTo, task, description)
+    newChore(assignedUser, task, description)
     close()
   }
-
-  useEffect(() => {
-    const setup = async () => setAssignOptions([...await getRoomates(), 'None'])
-    setup()
-  }, [])
 
   return (
     <>
@@ -44,16 +38,7 @@ const NewChore = () => {
           <label> Short description: </label>
           <input value={description} type="text" onChange={e => setDescription(e.target.value)} />
           <label> Assign to: </label>
-          <Dropdown>
-            <Dropdown.Toggle variant="success">
-              {assignedTo}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              {assignOptions.map(a => (
-                <Dropdown.Item key={a} onClick={() => setAssignedTo(a)}>{a}</Dropdown.Item>
-              ))}
-            </Dropdown.Menu>
-          </Dropdown>
+          <AssignOptions roommates={roommates} assignedTo={assignedUser} setAssignedUser={setAssignedUser} />
         </Modal.Body>
         <Modal.Footer>
           <button type="button" onClick={() => create()}> Create </button>

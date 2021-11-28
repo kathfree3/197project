@@ -21,16 +21,10 @@ export const signup = async (router, name, username, password) => {
   return data.success ? router.push('/pickhouse') : alert(data)
 }
 
-export const getUserLoggedin = async () => {
-  const { data } = await axios.get(`/account/isloggedin`)
+export const getName = async () => {
+  const { data } = await axios.get(`/account/loggedin`)
   return data
 }
-
-export const whoLoggedIn = async () => {
-  const { data } = await axios.get(`/account/userloggedin`)
-  return data.loggedin
-}
-
 // From the register house router
 export const getHouses = async () => {
   const { data } = await axios.get(`/registerhouse/joinoptions`)
