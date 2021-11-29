@@ -1,4 +1,32 @@
-### Accomplished for Project MS1
+
+# Roommate House Manager Application 
+
+## Overview 
+description of what you hope to build and what your project will accomplish
+
+### Features
+
+
+### Technologies
+Express
+NextJS
+React
+Axios
+Mongoose
+Moment
+
+Styling
+- Bootstrap
+- React Bootstrap
+
+State management
+React hooks/ life cycle methods
+Routing
+Styling/ Design
+Backend (35 points)
+
+### Milestone Breakdown
+#### Accomplished for Project MS1
 - A user can register for an account/ login
 - When a user signs up they can either create a new house to join, or join an existing one as long as they have the associated password 
 - Once logged in a user can view chores tagged for their house, or they have an option to create new chores
@@ -10,7 +38,7 @@
   - Used a packaged called motion to manipulate the timestamp/ date fields on the laundry
 
 
-### Accomplished for Project MS2
+#### Accomplished for Project MS2
 Backend
 - Needed to clean up routes for creating/ joining houses so proper error messages would be displayed
 
@@ -25,31 +53,3 @@ Overall
 
 Chores
 - User can now modify a chore to assign/ reassign it to someone else!
-
-
-Feature list (detailed view into what users will be able to do on your application)
-
-Milestone breakdown (what features you will accomplish by which milestone)
-
-
-## Roommate House Manager Application 
-
-### Overview 
-description of what you hope to build and what your project will accomplish
-
-### Technologies
-Technologies/frameworks/libraries needed or used
-
-State management
-React hooks/ life cycle methods
-Routing
-Styling/ Design
-Backend (35 points)
-
-Main areas that we are looking for
-
-Express Server
-Session management
-API endpoints
-MongoDB Integration
-Technicality (10 points)
