@@ -14,6 +14,9 @@ House Model Fields
 - Password (String)
 - Laundry (List of Strings representing laundry IDs)
 
+House Breakdown
+- When a user signs up, they can create a new house by providing its address and a password that other members will use to join this house. 
+- A house has associated chores and laundry machines
 
 ### Users
 Roommate Model Fields
@@ -21,6 +24,13 @@ Roommate Model Fields
 - Name (String, representing their first name/ nickname)
 - Password (String)
 - HouseID (String, representing the houseID they are registered to)
+
+Roommmate Breakdown
+- Use their username and password to log in 
+- When signing up, they have to provide a username, password, and name
+- Also upon signing up, a user can join a current house in the system or register a new house 
+- A roommate/ user has the ability to create new chores, modify current chores, register new laundry machines, and "do laundry"
+
 
 ### Laundry
 Laundry Model Fields
@@ -30,7 +40,17 @@ Laundry Model Fields
 - inUse (boolean field representing whether or not their or clothes cuurrently in that machine)
 - timeCompleted (Date field representing if the machine is in use, what time that load will be over)
 
+Laundry Breakdown
+- Their document _id is stored in the Laundry array of the house they are associated with
+- If a machine is currently not in use, a user can start a load. Starting a load modifies the timeCompleted field and similarly will display a timer on the frontend laundry page indicating how much time is left in this load.
+- When the timer runs out/ the timeCompleted field becomes equal to the current time, the frontend displays a message that says the load is complete and a button to "take clothing out"
+  - This is because a lot of times people don't take their clothing out of machines at the exact time the load ends. This will help roommies know if a machine is actually empty or if they will need to remove someones clothes if they want to put in a load
+- When the "take clothing out" button is clicked, the inUse field toggles to false for the machine, and then a button to start a new load will appear on the laundry frontend page. 
+- When registering a new laundry machine, the duration field must be a number that indicates the length that machine takes to run in minutes. 
+  - If an invalid input is given, the creation of the machine will be rejected. 
+  - Also when registering the machine, the only options for the type are washer and dryer. 
 
+ 
 
 ### Chores
 Chore Model Fields
@@ -39,6 +59,14 @@ Chore Model Fields
 - Completed (Boolean field representing whether or not this task has been completed)
 - Task (String, actual task that needs to be done)
 - Description (String, description of the task where you can include more information about it)
+
+Chore Breakdown
+- The default _id of the house object they are associated with is stored in the houseID field
+- A chore can either be assigned to a roommate of your house, or to no one. 
+- All roommates have the ability to change who a chore is associated to
+- A chore can be marked as completed, and when this happens it will visually disappear from the current chores section and move to the completed chores section on the front end
+- A chore that is marked as completed can be untoggled and thus marked as uncompleted
+
 
 ## Technologies
 - Express
