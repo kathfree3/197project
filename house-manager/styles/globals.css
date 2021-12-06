@@ -1,3 +1,5 @@
+/* Global styles to be used throughout the enitre application */
+
 form {
   display: flex;
   margin: auto;
@@ -33,5 +35,3 @@ input {
 label {
   margin: 0.25rem 0rem;
 }
-
-

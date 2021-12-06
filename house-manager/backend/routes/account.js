@@ -1,8 +1,13 @@
-// routes to handle the log in/ sign up system
+/** ******************************************
+ * Routes under the /account prefix
+ * Used to handle the log in/ sign up system
+ * ****************************************** */
 
+// package imports
 const express = require('express')
-const Roommate = require('../models/roommate')
 
+// local imports
+const Roommate = require('../models/roommate')
 const isAuthenticated = require('../middlewares/isAuthenticated')
 const isNotLoggedIn = require('../middlewares/isNotLoggedIn')
 
@@ -17,7 +22,7 @@ router.post('/login', isNotLoggedIn, async (req, res) => {
       res.send("This username doesn't exist")
     } else {
       const { password: passDB, name, houseID } = user
-      if (password === passDB) {
+      if (password === passDB) { // valid password
         req.session.username = username
         req.session.house = houseID
         req.session.name = name
@@ -47,6 +52,7 @@ router.post('/signup', isNotLoggedIn, async (req, res) => {
   }
 })
 
+// user logsout
 router.post('/logout', isAuthenticated, async (req, res) => {
   req.session.name = null
   req.session.username = null
@@ -54,15 +60,7 @@ router.post('/logout', isAuthenticated, async (req, res) => {
   res.send('logged out')
 })
 
-router.get('/userloggedin', async (req, res) => {
-  const { username } = req.session
-  if (username !== null && username !== '') {
-    res.send({ username })
-  } else {
-    res.send({ loggedin: 'false' })
-  }
-})
-
+// method for getting username and name of who is logged in
 router.get('/loggedin', async (req, res) => {
   const { username, name } = req.session
   if (username) {

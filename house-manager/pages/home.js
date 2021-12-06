@@ -5,10 +5,12 @@ import Tab from 'react-bootstrap/Tab'
 import Table from 'react-bootstrap/Table'
 
 // local imports
-import { page } from '../styles/utils.module.css'
 import Chore from '../components/Chore'
 import NewChore from '../components/NewChore'
 import { getChores, needToBeLoggedIn, getRoomates } from '../components/routecalls'
+
+// style
+import { page } from '../styles/utils.module.css'
 
 const Home = ({ username }) => {
   const [chores, setChores] = useState([])
@@ -34,6 +36,7 @@ const Home = ({ username }) => {
     </Table>
   )
 
+  // update periodically
   useEffect(() => {
     const setup = async () => {
       setChores(await getChores())
@@ -46,11 +49,13 @@ const Home = ({ username }) => {
     return () => clearInterval(intervalID)
   }, [])
 
+  // filter method: completed or not
   const done = (c, wanted) => {
     const { completed } = c
     return completed === wanted
   }
 
+  // filter method: my chores
   const myChores = c => {
     const { assignedTo } = c
     return assignedTo === username
@@ -76,6 +81,7 @@ const Home = ({ username }) => {
 
 export default Home
 
+// nextJS --> authenticate route
 export async function getServerSideProps(context) {
   return needToBeLoggedIn(context)
 }

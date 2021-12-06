@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 
 // local imports
 import { signup, cantBeLoggedIn } from '../components/routecalls'
+
+// style
 import { createbutton, page } from '../styles/utils.module.css'
 
 const Signup = () => {
@@ -36,6 +38,7 @@ const Signup = () => {
 
 export default Signup
 
+// nextJS --> authenticate route
 export async function getServerSideProps(context) {
   return cantBeLoggedIn(context)
 }

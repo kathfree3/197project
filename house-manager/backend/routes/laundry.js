@@ -1,14 +1,20 @@
-// Router for the laundry
+/** ******************************************
+ * Routes under the /laundry prefix
+ * Used to handle laundry methods
+ * ****************************************** */
+
+// package imports
 const express = require('express')
 const moment = require('moment')
 
+// local imports
 const Laundry = require('../models/laundry')
 const House = require('../models/house')
 const isAuthenticated = require('../middlewares/isAuthenticated')
 
 const router = express.Router()
 
-// helper function
+// helper function to add a machine to a house
 const addLaundryToHouse = async (req, res, id) => {
   const { house } = req.session
   const home = await House.findById(house)
@@ -37,7 +43,7 @@ router.post('/create', isAuthenticated, async (req, res) => {
   }
 })
 
-// get laundry machines for a given house
+// get all laundry machines for a given house
 router.get('/viewall', isAuthenticated, async (req, res) => {
   const { house } = req.session
   try {
@@ -62,7 +68,7 @@ router.post('/startload/:id', isAuthenticated, async (req, res) => {
       laundry.timeCompleted = loadOverAt.valueOf()
       laundry.inUse = true
       laundry.save()
-      res.send({ succes: true })
+      res.send({ success: true })
     }
   } catch (err) {
     res.send(err)
@@ -80,9 +86,9 @@ router.post('/finishload/:id', isAuthenticated, async (req, res) => {
     if (now >= over) {
       laundry.inUse = false
       laundry.save()
-      res.send({ succes: true })
+      res.send({ success: true })
     } else {
-      res.send({ succes: false, msg: 'not done yet' })
+      res.send({ success: false, msg: 'not done yet' })
     }
   } catch (err) {
     res.send(err)

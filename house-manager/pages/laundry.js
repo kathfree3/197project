@@ -2,14 +2,17 @@
 import React, { useState, useEffect } from 'react'
 
 // local imports
-import { page, flexwrapper, expand } from '../styles/utils.module.css'
 import LaundryMachine from '../components/LaundryMachine'
 import NewMachine from '../components/NewMachine'
 import { getMachines, needToBeLoggedIn } from '../components/routecalls'
 
+// style
+import { page, flexwrapper, expand } from '../styles/utils.module.css'
+
 const LaundryPage = () => {
   const [machines, setMachines] = useState([])
 
+  // update periodically
   useEffect(() => {
     const setup = async () => setMachines(await getMachines())
     setup()
@@ -19,22 +22,25 @@ const LaundryPage = () => {
     return () => clearInterval(intervalID)
   }, [])
 
-  const check = (m, t) => {
-    const { type } = m
-    return t === type
+  // filter method: separate laundry and dryers
+  const check = (machine, wantedType) => {
+    const { type } = machine
+    return wantedType === type
   }
 
-  const mapM = m => {
-    const { _id } = m
-    return <LaundryMachine key={_id} machine={m} />
+  // map method: take in machine object and display machine component
+  const display = machine => {
+    const { _id } = machine
+    return <LaundryMachine key={_id} machine={machine} />
   }
 
+  // display
   return (
     <div className={page}>
       {machines && (
       <div className={flexwrapper}>
-        <div className={expand}>{machines.filter(m => check(m, 'Washer')).map(m => mapM(m))}</div>
-        <div className={expand}>{machines.filter(m => check(m, 'Dryer')).map(m => mapM(m))}</div>
+        <div className={expand}>{machines.filter(m => check(m, 'Washer')).map(m => display(m))}</div>
+        <div className={expand}>{machines.filter(m => check(m, 'Dryer')).map(m => display(m))}</div>
       </div>
       )}
       <NewMachine />
@@ -44,6 +50,7 @@ const LaundryPage = () => {
 
 export default LaundryPage
 
+// nextJS --> authenticate route
 export async function getServerSideProps(context) {
   return needToBeLoggedIn(context)
 }

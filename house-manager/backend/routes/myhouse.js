@@ -1,6 +1,12 @@
+/** ******************************************
+ * Routes under the /myhouse prefix
+ * Used to get information about your home
+ * ****************************************** */
+
+// package imports
 const express = require('express')
 
-// local
+// local imports
 const House = require('../models/house')
 const Roommate = require('../models/roommate')
 const isAuthenticated = require('../middlewares/isAuthenticated')
@@ -29,12 +35,8 @@ router.get('/members', isAuthenticated, async (req, res) => {
       arr.push(p)
     })
     Promise.all(arr)
-      .then(x => {
-        res.send(x)
-      })
-      .catch(err => {
-        res.send('eee')
-      })
+      .then(x => res.send(x))
+      .catch(err => res.send('eee'))
   } catch (err) {
     res.send('error getting members')
   }

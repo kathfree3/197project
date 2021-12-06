@@ -1,6 +1,12 @@
+/** ******************************************
+ * Routes under the /chores prefix
+ * Used to handle chores methods
+ * ****************************************** */
+
+// package imports
 const express = require('express')
 
-// local
+// local imports
 const Chore = require('../models/chore')
 const isAuthenticated = require('../middlewares/isAuthenticated')
 
@@ -8,17 +14,11 @@ const router = express.Router()
 
 // helper function for saving a chore once it has been modified
 const saveChore = (res, chore) => {
-  chore.save(e => {
-    if (e) {
-      res.send('issue saving chore')
-    } else {
-      res.send({ success: true })
-    }
-  })
+  chore.save(e => (e ? res.send('issue saving chore') : res.send({ success: true })))
 }
 
-// get all the chores for your house
-router.get('/', isAuthenticated, async (req, res, next) => {
+// get all the chores for a house
+router.get('/', isAuthenticated, async (req, res) => {
   const { house } = req.session
   try {
     const chores = await Chore.find({ houseID: house })
@@ -31,11 +31,11 @@ router.get('/', isAuthenticated, async (req, res, next) => {
 // create a chore
 router.post('/create', isAuthenticated, async (req, res) => {
   const { assignedTo, task, description } = req.body
-  const houseID = req.session.house
-  const completed = false
+  const { house: houseID } = req.session
+
   try {
     await Chore.create({
-      houseID, assignedTo, completed, task, description,
+      houseID, assignedTo, completed: false, task, description,
     })
     res.send({ success: true })
   } catch (err) {
@@ -43,6 +43,7 @@ router.post('/create', isAuthenticated, async (req, res) => {
   }
 })
 
+// assign a chore to a roommate of the house
 router.post('/:id/assign', isAuthenticated, async (req, res) => {
   const { id } = req.params
   const { assignTo } = req.body
@@ -55,7 +56,7 @@ router.post('/:id/assign', isAuthenticated, async (req, res) => {
   }
 })
 
-// route for toggling a chore completed or not
+// toggling a chores completed field
 router.post('/:id/togglecomplete', isAuthenticated, async (req, res) => {
   const { id } = req.params
   try {

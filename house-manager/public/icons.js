@@ -1,4 +1,6 @@
-import React from 'react'
+// Separate file to store all the svg icons
+
+import React from 'react' // package imports
 
 export const Eject = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-eject-fill" viewBox="0 0 16 16">

@@ -4,10 +4,11 @@ import moment from 'moment'
 
 // local imports
 import { stopLoad, startLoad } from './routecalls'
+
+// style
 import {
   machinewrapper, start, takeout, running,
 } from '../styles/utils.module.css'
-
 import { Eject, Timer, PlayButton } from '../public/icons'
 
 const LaundryMachine = ({ machine }) => {
@@ -53,6 +54,7 @@ const LaundryMachine = ({ machine }) => {
     )
   }
 
+  // display
   return (
     <div className={machinewrapper}>
       <h2>{`${type}`}</h2>

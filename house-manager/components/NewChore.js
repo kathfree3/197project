@@ -5,6 +5,8 @@ import Modal from 'react-bootstrap/Modal'
 // local imports
 import AssignOptions from './AssignOptions'
 import { newChore } from './routecalls'
+
+// style
 import { createbutton, full } from '../styles/utils.module.css'
 
 const NewChore = ({ roommates }) => {

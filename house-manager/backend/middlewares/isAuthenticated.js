@@ -1,5 +1,4 @@
-// Middleware to be used when a user needs to be logged in
-// to access a certain route
+// Middleware to be used when a user needs to be logged in to access a certain route
 
 const isAuthenticated = (req, res, next) => {
   // get username from session

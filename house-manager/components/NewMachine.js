@@ -4,8 +4,10 @@ import Modal from 'react-bootstrap/Modal'
 import Dropdown from 'react-bootstrap/Dropdown'
 
 // local imports
-import { createbutton } from '../styles/utils.module.css'
 import { createMachine } from './routecalls'
+
+// style
+import { createbutton } from '../styles/utils.module.css'
 
 const NewMachine = () => {
   const [show, setShow] = useState(false)
@@ -36,9 +38,7 @@ const NewMachine = () => {
           <Dropdown>
             <Dropdown.Toggle variant="success">{type}</Dropdown.Toggle>
             <Dropdown.Menu>
-              {typeOptions.map(t => (
-                <Dropdown.Item key={t} onClick={() => setType(t)}>{t}</Dropdown.Item>
-              ))}
+              {typeOptions.map(t => (<Dropdown.Item key={t} onClick={() => setType(t)}>{t}</Dropdown.Item>))}
             </Dropdown.Menu>
           </Dropdown>
           <label> Duration (in minutes): </label>

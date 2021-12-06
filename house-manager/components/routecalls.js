@@ -1,5 +1,25 @@
+/** ****************************************************************
+ * Define all the backend function calls to be used in the different
+ * pages and components of the front end application
+ * *************************************************************** */
+
 /* eslint-disable no-alert */
 import axios from 'axios'
+
+/* *******************************************************************
+  Functions for the account route
+******************************************************************** */
+export const login = async (router, username, password) => {
+  const { data } = await axios.post(`/account/login`, { username, password })
+  const { success } = data
+  return success ? router.push('/home') : alert(data)
+}
+
+export const signup = async (router, name, username, password) => {
+  const { data } = await axios.post(`/account/signup`, { name, username, password })
+  const { success } = data
+  return success ? router.push('/pickhouse') : alert(data)
+}
 
 // user log in/ log out methods
 export const logout = async router => {
@@ -11,21 +31,14 @@ export const logout = async router => {
   }
 }
 
-export const login = async (router, username, password) => {
-  const { data } = await axios.post(`/account/login`, { username, password })
-  return data.success ? router.push('/home') : alert(data)
-}
-
-export const signup = async (router, name, username, password) => {
-  const { data } = await axios.post(`/account/signup`, { name, username, password })
-  return data.success ? router.push('/pickhouse') : alert(data)
-}
-
 export const getName = async () => {
   const { data } = await axios.get(`/account/loggedin`)
   return data
 }
-// From the register house router
+
+/* *******************************************************************
+  Functions for the register house route
+******************************************************************** */
 export const getHouses = async () => {
   const { data } = await axios.get(`/registerhouse/joinoptions`)
   return data
@@ -33,15 +46,19 @@ export const getHouses = async () => {
 
 export const createHouse = async (router, address, password) => {
   const { data } = await axios.post(`/registerhouse/create`, { address, password })
-  return data.success ? router.push('/home') : alert(data.msg)
+  const { success, msg } = data
+  return success ? router.push('/home') : alert(msg)
 }
 
 export const joinHouse = async (router, _id, password) => {
   const { data } = await axios.post(`/registerhouse/join`, { _id, password })
-  return data.success ? router.push('/home') : alert(data)
+  const { success } = data
+  return success ? router.push('/home') : alert(data)
 }
 
-// From the chore router
+/* *******************************************************************
+  Functions for the chores route
+******************************************************************** */
 export const getChores = async () => {
   const { data } = await axios.get(`/chores`)
   return data
@@ -53,24 +70,31 @@ export const toggle = async id => {
 
 export const newChore = async (assignedTo, task, description) => {
   const { data } = await axios.post(`/chores/create`, { assignedTo, task, description })
-  return data.success ? alert('Created Chore') : alert('Not a success')
+  const { success } = data
+  return success ? alert('Created Chore') : alert('Not a success')
 }
 
 export const assignChore = async (choreID, assignTo) => {
   const { data } = await axios.post(`/chores/${choreID}/assign`, { assignTo })
-  return !data.success && alert(data.msg)
+  const { success, msg } = data
+  return !success && alert(msg)
 }
 
-// My house methods
+/* *******************************************************************
+  Functions for the myhouse route
+******************************************************************** */
 export const getRoomates = async () => {
   const { data } = await axios.get(`/myhouse/members`)
   return data
 }
 
-// Laundry router
+/* *******************************************************************
+  Functions for the laundry route
+******************************************************************** */
 export const createMachine = async (type, duration) => {
   const { data } = await axios.post(`/laundry/create`, { type, duration })
-  return !data.success && alert('Error creating machine')
+  const { success } = data
+  return !success && alert('Error creating machine')
 }
 
 export const getMachines = async () => {
@@ -80,30 +104,29 @@ export const getMachines = async () => {
 
 export const startLoad = async id => {
   const { data } = await axios.post(`/laundry/startload/${id}`)
-  return data.success ? alert('Laundry Timer Started') : data.err
+  const { success, err } = data
+  return success ? alert('Laundry Timer Started') : alert(err)
 }
 
 export const stopLoad = async id => {
   const { data } = await axios.post(`/laundry/finishload/${id}`)
-  return data.success ? alert('Laundry taken out') : data.msg
+  const { success, msg } = data
+  return success ? alert('Laundry taken out') : alert(msg)
 }
 
-// fcuntions for authentication
+/* *******************************************************************
+  Functions used for getServerSideProps for pages
+******************************************************************** */
 export const needToBeLoggedIn = async context => {
   const { req } = context
-
   const { username } = req.session
 
-  if (!username) {
+  if (!username) { // redirect to login
     return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
+      redirect: { destination: '/login', permanent: false },
     }
   }
-
-  return {
+  return { // valid
     props: { username },
   }
 }
@@ -114,10 +137,7 @@ export const cantBeLoggedIn = async context => {
 
   if (username) {
     return {
-      redirect: {
-        destination: '/home',
-        permanent: false,
-      },
+      redirect: { destination: '/home', permanent: false },
     }
   }
   return {

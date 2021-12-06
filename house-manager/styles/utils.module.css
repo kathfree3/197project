@@ -1,3 +1,4 @@
+/*********** Used for Modals and Forms ***************************/
 .createbutton {
   padding: 0.5rem;
   margin: 1rem 0rem;
@@ -20,6 +21,11 @@
   border:none;
 }
 
+.full input {
+  width: 100%;
+}
+
+/*********** Laundry Styles ***************************/
 .start {
   padding: 0;
   margin: 0;
@@ -42,25 +48,6 @@
   background: white;
   color: #bb9631;
   border: none;
-}
-
-.logoutLink {
-  padding: 0;
-  margin: 0rem 1rem;
-  background: none;
-  color: white;
-  border: none;
-  text-decoration: underline;
-}
-
-.page {
-  padding: 1rem;
-}
-
-.flexwrapper {
-  display: flex;
-  gap: 10px;
-  column-gap: 3rem;
 }
 
 .expand {
@@ -86,6 +73,23 @@
   font-weight: normal;
 } 
 
-.full input {
-  width: 100%;
+.flexwrapper {
+  display: flex;
+  gap: 10px;
+  column-gap: 3rem;
+}
+
+/*********** Nav bar ***************************/
+.logoutLink {
+  padding: 0;
+  margin: 0rem 1rem;
+  background: none;
+  color: white;
+  border: none;
+  text-decoration: underline;
+}
+
+/*********** Used across different pages ***************************/
+.page {
+  padding: 1rem;
 }

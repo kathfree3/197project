@@ -6,11 +6,14 @@ import Nav from 'react-bootstrap/Nav'
 
 // local imports
 import { logout, getName } from './routecalls'
+
+// style
 import { logoutLink } from '../styles/utils.module.css'
 
 const NavBar = () => {
   const [user, setUser] = useState({})
 
+  // update this every two seconds
   useEffect(() => {
     const setup = async () => setUser(await getName())
     setup()
@@ -20,8 +23,10 @@ const NavBar = () => {
     return () => clearInterval(intervalID)
   }, [])
 
+  // get name field of user
   const { name } = user
 
+  // setup nextJS router
   const router = useRouter()
 
   return (

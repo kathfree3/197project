@@ -1,5 +1,12 @@
+/** ******************************************
+ * Routes under the /registerhouse prefix
+ * Used to handle creating a new house
+ * ****************************************** */
+
+// package imports
 const express = require('express')
 
+// local imports
 const House = require('../models/house')
 const Roomate = require('../models/roommate')
 
@@ -10,13 +17,7 @@ const addHouseToUser = async (req, res, username, id) => {
   req.session.house = id
   const roomie = await Roomate.findOne({ username })
   roomie.houseID = id
-  roomie.save(err => {
-    if (err) {
-      res.send('Issue adding house field to user')
-    } else {
-      res.send({ success: true })
-    }
-  })
+  roomie.save(err => (err ? res.send('Issue adding house to user') : res.send({ success: true })))
 }
 
 // can only create a house
@@ -34,6 +35,7 @@ router.post('/create', async (req, res) => {
   }
 })
 
+// get houses in system
 router.get('/joinoptions', async (req, res) => {
   try {
     const options = await House.find()
@@ -43,22 +45,26 @@ router.get('/joinoptions', async (req, res) => {
   }
 })
 
+// request to join a house
 router.post('/join', async (req, res) => {
   const { _id, password } = req.body
   const { username } = req.session
   try {
     const house = await House.findById({ _id })
     if (!house) {
-      return res.send("house doesn't exist")
+      res.send("house doesn't exist")
+    } else {
+      const { password: housePWD } = house
+      if (housePWD === password) {
+        house.members.push(username)
+        house.save()
+        addHouseToUser(req, res, username, _id)
+      } else {
+        res.send('Wrong Password')
+      }
     }
-    if (house.password === password) {
-      house.members.push(username)
-      house.save()
-      return addHouseToUser(req, res, username, _id)
-    }
-    return res.send('Wrong Password')
   } catch (err) {
-    return res.send('Error joining house')
+    res.send('Error joining house')
   }
 })
 
